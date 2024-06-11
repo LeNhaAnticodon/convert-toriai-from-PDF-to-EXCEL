@@ -4,12 +4,15 @@ import com.example.convert_toriai_from_pdf_to_excel.model.CsvFile;
 import com.example.convert_toriai_from_pdf_to_excel.model.Setup;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Control;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SetupData {
@@ -19,6 +22,8 @@ public class SetupData {
     private final Map<String, String> languageMap = new HashMap<>();
     private final Setup setup = new Setup();
     private final Path path = Paths.get(FILE_SETUP_NAME);
+
+    private final ObservableList<Object> controls = FXCollections.observableArrayList();
 
     private SetupData() {
         languageMap.put("Chọn file cần chuyển", "Select_the_file_to_transfer");
@@ -58,8 +63,27 @@ public class SetupData {
         return instance;
     }
 
+    public ObservableList<Object> getControls() {
+        return controls;
+    }
+
     public Setup getSetup() {
         return setup;
+    }
+
+    public void setLinkPdfFile(String linkPdfFile) throws IOException {
+        setup.setLinkPdfFile(linkPdfFile);
+        saveSetup();
+    }
+
+    public void setLinkSaveCvsFileDir(String SaveCvsFileDir) throws IOException {
+        setup.setLinkSaveCvsFileDir(SaveCvsFileDir);
+        saveSetup();
+    }
+
+    public void setLang(String lang) throws IOException {
+        setup.setLang(lang);
+        saveSetup();
     }
 
     public ObservableList<CsvFile> getCsvFiles() {
@@ -85,9 +109,14 @@ public class SetupData {
             boolean eof = false;
             while(!eof) {
                 try {
+
                     setup.setLinkPdfFile(dis.readUTF());
                     setup.setLinkSaveCvsFileDir(dis.readUTF());
                     setup.setLang(dis.readUTF());
+
+                    System.out.println(":" + setup.getLinkPdfFile());
+                    System.out.println(":" + setup.getLinkSaveCvsFileDir());
+                    System.out.println(":" + setup.getLang());
                 } catch(EOFException e) {
                     eof = true;
                 }
@@ -103,9 +132,9 @@ public class SetupData {
 //        }
 
         try (DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(Files.newOutputStream(path)))) {
-            dos.writeUTF(setup.getLinkPdfFile());
-            dos.writeUTF(setup.getLinkSaveCvsFileDir());
-            dos.writeUTF(setup.getLang());
+                dos.writeUTF(setup.getLinkPdfFile());
+                dos.writeUTF(setup.getLinkSaveCvsFileDir());
+                dos.writeUTF(setup.getLang());
         }
     }
 
