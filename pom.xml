@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.convert_toriai_from_pdf_to_excel/com.example.convert_toriai_from_pdf_to_excel.HelloApplication
+                                com.example.convert_toriai_from_pdf_to_excel/com.example.convert_toriai_from_pdf_to_excel.MainApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
