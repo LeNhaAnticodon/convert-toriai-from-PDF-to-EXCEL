@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1b1403b-b6e3-4111-8e2a-abaec6ff8cc2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/convert/ReadPDFToExcel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup data.dat" beforeDir="false" afterPath="$PROJECT_DIR$/setup data.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/ConVertPdfToExcelCHLController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/ConVertPdfToExcelCHLController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/dao/SetupData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/dao/SetupData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/languagesMap.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/languagesMap.properties" afterDir="false" />
-    </list>
+    <list default="true" id="d1b1403b-b6e3-4111-8e2a-abaec6ff8cc2" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -93,7 +83,7 @@
       <workItem from="1718086353005" duration="9926000" />
       <workItem from="1718121114894" duration="12790000" />
       <workItem from="1718184235127" duration="4034000" />
-      <workItem from="1718190823980" duration="8961000" />
+      <workItem from="1718190823980" duration="9475000" />
     </task>
     <servers />
   </component>
