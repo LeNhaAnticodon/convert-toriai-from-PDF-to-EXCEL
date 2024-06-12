@@ -34,6 +34,9 @@ public class SetupData {
         languageMap.put("Trợ giúp", "Help");
         languageMap.put("Chỉnh Sửa", "Edit");
         languageMap.put("Tệp", "File");
+        languageMap.put("Xác nhận địa chỉ file PDF", "Confirm_the_PDF_address_file");
+        languageMap.put("Địa chỉ của file PDF chưa được xác nhận", "The_address_of_the_PDF_file_has_not_been_confirmed");
+        languageMap.put("Hãy chọn file PDF để tiếp tục!", "Please_select_the_PDF_file_to_continue");
 
         languageMap.put("転送するファイルを選択します", "Select_the_file_to_transfer");
         languageMap.put("ファイルを保存するフォルダーを選択します", "Select_the_folder_to_save_the_file");
@@ -43,6 +46,9 @@ public class SetupData {
         languageMap.put("ヘルプ", "Help");
         languageMap.put("編集", "Edit");
         languageMap.put("ファイル", "File");
+        languageMap.put("PDFファイルの場所を確認", "Confirm_the_PDF_address_file");
+        languageMap.put("PDFファイルのアドレスは未確認です", "The_address_of_the_PDF_file_has_not_been_confirmed");
+        languageMap.put("続行するには PDF ファイルを選択してください。", "Please_select_the_PDF_file_to_continue");
 
         languageMap.put("Select the file to transfer", "Select_the_file_to_transfer");
         languageMap.put("Select the folder to save the file", "Select_the_folder_to_save_the_file");
@@ -52,6 +58,9 @@ public class SetupData {
         languageMap.put("Help", "Help");
         languageMap.put("Edit", "Edit");
         languageMap.put("File", "File");
+        languageMap.put("Confirm the PDF address file", "Confirm_the_PDF_address_file");
+        languageMap.put("The address of the PDF file has not been confirmed", "The_address_of_the_PDF_file_has_not_been_confirmed");
+        languageMap.put("Please select the PDF file to continue!", "Please_select_the_PDF_file_to_continue");
     }
 
     public static SetupData getInstance() {
@@ -71,14 +80,22 @@ public class SetupData {
         return setup;
     }
 
-    public void setLinkPdfFile(String linkPdfFile) throws IOException {
+    public void setLinkPdfFile(String linkPdfFile){
         setup.setLinkPdfFile(linkPdfFile);
-        saveSetup();
+        try {
+            saveSetup();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public void setLinkSaveCvsFileDir(String SaveCvsFileDir) throws IOException {
+    public void setLinkSaveCvsFileDir(String SaveCvsFileDir) {
         setup.setLinkSaveCvsFileDir(SaveCvsFileDir);
-        saveSetup();
+        try {
+            saveSetup();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void setLang(String lang) throws IOException {
@@ -94,7 +111,7 @@ public class SetupData {
         return languageMap;
     }
 
-    public void loadSetup(){
+    public void loadSetup() throws IOException {
         if (Files.notExists(path)) {
             try {
                 Files.createFile(path);
@@ -110,19 +127,23 @@ public class SetupData {
             while(!eof) {
                 try {
 
-                    setup.setLinkPdfFile(dis.readUTF());
-                    setup.setLinkSaveCvsFileDir(dis.readUTF());
-                    setup.setLang(dis.readUTF());
+                    String linkPdfFile = dis.readUTF();
+                    String linkSaveCvsFileDir = dis.readUTF();
+                    String lang = dis.readUTF();
 
+                    setup.setLinkPdfFile(linkPdfFile);
                     System.out.println(":" + setup.getLinkPdfFile());
+
+                    setup.setLinkSaveCvsFileDir(linkSaveCvsFileDir);
                     System.out.println(":" + setup.getLinkSaveCvsFileDir());
+
+                    setup.setLang(lang);
                     System.out.println(":" + setup.getLang());
+
                 } catch(EOFException e) {
                     eof = true;
                 }
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 

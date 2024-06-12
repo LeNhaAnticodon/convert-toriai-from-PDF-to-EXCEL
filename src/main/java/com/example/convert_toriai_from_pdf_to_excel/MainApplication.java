@@ -21,7 +21,11 @@ public class MainApplication extends Application {
     @Override
     public void init() throws Exception {
         super.init();
-        SetupData.getInstance().loadSetup();
+        try {
+            SetupData.getInstance().loadSetup();
+        } catch (IOException e) {
+            System.out.println("không đọc được file");
+        }
     }
 
     public static void main(String[] args) {

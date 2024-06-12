@@ -1,23 +1,28 @@
 package com.example.convert_toriai_from_pdf_to_excel;
 
+import com.example.convert_toriai_from_pdf_to_excel.convert.ReadPDFToExcel;
 import com.example.convert_toriai_from_pdf_to_excel.dao.SetupData;
 import com.example.convert_toriai_from_pdf_to_excel.model.CsvFile;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ConVertPdfToExcelCHLController implements Initializable {
+
     @FXML
     public TextField linkPdfFile;
     @FXML
@@ -57,8 +62,18 @@ public class ConVertPdfToExcelCHLController implements Initializable {
 
     private ObservableList<Object> controls;
 
+    private final Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+
+    private static final String CONFIRM_PDF_FILE_TITLE = "Xác nhận địa chỉ file PDF";
+    private static final String CONFIRM_PDF_FILE_HEADER = "Địa chỉ của file PDF chưa được xác nhận";
+    private static final String CONFIRM_PDF_FILE_CONTENT = "Hãy chọn file PDF để tiếp tục!";
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("link csv " + SetupData.getInstance().getSetup().getLinkSaveCvsFileDir());
+        System.out.println("old link file " + SetupData.getInstance().getSetup().getLinkPdfFile());
+        System.out.println("old" + SetupData.getInstance().getSetup().getLinkPdfFile());
+
         csvFIleList.setItems(SetupData.getInstance().getCsvFiles());
 
         languageMap = SetupData.getInstance().getLanguageMap();
@@ -99,33 +114,42 @@ public class ConVertPdfToExcelCHLController implements Initializable {
             }
         });
 
-        linkCvsDir.setText(SetupData.getInstance().getSetup().getLinkSaveCvsFileDir());
+        File fileCsvDiv = new File(SetupData.getInstance().getSetup().getLinkSaveCvsFileDir());
+
+        if (fileCsvDiv.isDirectory()) {
+            linkCvsDir.setText(SetupData.getInstance().getSetup().getLinkSaveCvsFileDir());
+        }
     }
 
     private void setlang() {
         try {
             SetupData.getInstance().setLang(languages.getSelectedToggle().getUserData().toString());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
     }
 
     @FXML
-    public void getPdfFile(ActionEvent actionEvent) throws IOException {
+    public File getPdfFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
 
         String oldLinkPdfFile = SetupData.getInstance().getSetup().getLinkPdfFile();
+        System.out.println("old" + oldLinkPdfFile);
         if (!oldLinkPdfFile.isBlank()) {
             String[] oldLinkPdfFileArr = oldLinkPdfFile.split("\\\\");
             String linkPdfFileDir = "";
             for (int i = 0; i < oldLinkPdfFileArr.length - 1; i++) {
                 linkPdfFileDir = linkPdfFileDir.concat(oldLinkPdfFileArr[i]).concat("\\");
             }
-            fileChooser.setInitialDirectory(new File(linkPdfFileDir));
+
+            File file = new File(linkPdfFileDir);
+            if (file.isDirectory()) {
+                fileChooser.setInitialDirectory(file);
+            }
         }
 
-        File file = null;
+        File file;
         while (true) {
             try {
                 file = fileChooser.showOpenDialog(menuBar.getScene().getWindow());
@@ -148,18 +172,125 @@ public class ConVertPdfToExcelCHLController implements Initializable {
                     csvDir = csvDir.concat(csvDirArr[i]).concat("\\");
                 }
                 linkCvsDir.setText(csvDir);
+                SetupData.getInstance().setLinkSaveCvsFileDir(csvDir);
+            }
+        } else {
+            System.out.println("không chọn file");
+        }
+
+        return file;
+    }
+
+    @FXML
+    public File setSaveCsvFileDir() {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File dir = directoryChooser.showDialog(menuBar.getScene().getWindow());
+
+        if (dir != null) {
+            String link = dir.getAbsolutePath();
+            linkCvsDir.setText(link);
+            SetupData.getInstance().setLinkSaveCvsFileDir(link);
+        } else {
+            System.out.println("không chọn thư mục");
+        }
+        return dir;
+    }
+
+    @FXML
+    public void convertFile(ActionEvent actionEvent) {
+        String pdfFilePath;
+        String csvFileDirPath;
+
+        // yêu cầu chọn địa chỉ file và thư mục khi 2 địa chỉ này chưa được chọn
+        // nếu chọn xong thì phải chuyển dữ liệu thành công thì mới thoát được vòng lặp
+        while (true) {
+            pdfFilePath = linkPdfFile.getText();
+            csvFileDirPath = linkCvsDir.getText();
+
+            File pdfFile = new File(pdfFilePath);
+            File csvFileDir = new File(csvFileDirPath);
+
+            boolean isFilePDF = pdfFile.isFile();
+            boolean isDir = csvFileDir.isDirectory();
+
+            if (!isFilePDF) {
+                confirmAlert.setTitle(CONFIRM_PDF_FILE_TITLE);
+                confirmAlert.setHeaderText(CONFIRM_PDF_FILE_HEADER);
+                confirmAlert.setContentText(CONFIRM_PDF_FILE_CONTENT);
+                updateLangAlert(confirmAlert);
+                Optional<ButtonType> result = confirmAlert.showAndWait();
+
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    File fileSelected = getPdfFile();
+
+                    if (fileSelected == null) {
+                        return;
+                    }
+
+                    // sau khi đã chọn xong file pdf thì gán luôn file do hàm chọn trả về để hàm lấy file để chuyển bên dưới
+                    // hoạt động đúng mà không phải thêm 1 vòng lặp nữa tính lại file
+                    pdfFile = fileSelected;
+                } else {
+                    return;
+                }
+            }
+
+            if (!isDir) {
+                // nếu địa chỉ file pdf đã xác nhận thì nó sẽ tự động lấy địa chỉ thư mục chứa file pdf đó nhập vào
+                // linkCvsDir, mà trước đó đã xác nhận chưa chọn thư mục chứa file đã chuyển nên cần xóa text của
+                // linkCvsDir đi để người dùng xác nhận lại, tránh hiển thị địa chỉ mặc định trên ỏ linkCvsDir làm khó hiểu
+                linkCvsDir.setText("");
+                confirmAlert.setTitle(CONFIRM_PDF_FILE_TITLE);
+                confirmAlert.setHeaderText(CONFIRM_PDF_FILE_HEADER);
+                confirmAlert.setContentText(CONFIRM_PDF_FILE_CONTENT);
+                updateLangAlert(confirmAlert);
+                Optional<ButtonType> result = confirmAlert.showAndWait();
+
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    File dirSelected = setSaveCsvFileDir();
+
+                    if (dirSelected == null) {
+                        return;
+                    }
+
+                    csvFileDir = dirSelected;
+                } else {
+                    return;
+                }
+            }
+
+            if (isFilePDF && isDir) {
+                System.out.println("đã chọn xong địa chỉ");
+                System.out.println(pdfFile.getAbsolutePath());
+                System.out.println(csvFileDir.getAbsolutePath());
+            }
+
+            try {
+                ReadPDFToExcel.convertPDFToExcel(pdfFile.getAbsolutePath(), csvFileDir.getAbsolutePath());
+                confirmAlert.setContentText("đã chuyển xong file sang các file csv, bạn có muốn mở thư mục chứa không?");
+                confirmAlert.showAndWait();
+                return;
+            } catch (Exception e) {
+                confirmAlert.setContentText("đã có lỗi, nội dung file pdf không phải là tính vật liệu hoặc file không được phép truy cập," +
+                        " bạn có muốn chọn file khác và thực hiện lại không?");
+                Optional<ButtonType> result = confirmAlert.showAndWait();
+
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    File fileSelected2 = getPdfFile();
+
+                    if (fileSelected2 == null) {
+                        return;
+                    }
+                } else {
+                    return;
+                }
             }
         }
 
     }
 
-    @FXML
-    public void setSaveCsvFileDir(ActionEvent actionEvent) {
-
-    }
-
-    @FXML
-    public void convertFile(ActionEvent actionEvent) {
+    private void updateLangAlert(Alert alert) {
+        updateLangInBackground(languages.getSelectedToggle(), FXCollections.observableArrayList(alert));
     }
 
     @FXML
@@ -218,6 +349,26 @@ public class ConVertPdfToExcelCHLController implements Initializable {
                             menuItem.setText(newText);
                         }
                     }
+                }
+            } else if (control instanceof Alert alert) {
+                String title = alert.getTitle();
+                String header = alert.getHeaderText();
+                String content = alert.getContentText();
+
+                String keyTitle = languageMap.get(title);
+                String keyHeader = languageMap.get(header);
+                String keyContent = languageMap.get(content);
+
+                if (keyTitle != null) {
+                    alert.setTitle(bundle.getString(keyTitle + "." + lang));
+                }
+
+                if (keyHeader != null) {
+                    alert.setHeaderText(bundle.getString(keyHeader + "." + lang));
+                }
+
+                if (keyContent != null) {
+                    alert.setContentText(bundle.getString(keyContent + "." + lang));
                 }
             }
         }
