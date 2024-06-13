@@ -480,6 +480,22 @@ public class ConVertPdfToExcelCHLController implements Initializable {
     }
 
     public void copyLinkCsvDir(ActionEvent actionEvent) {
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() {
+                Platform.runLater(() -> copylinkCsvFolder());
+                return null;
+            }
+        };
+
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
+
+    }
+
+    private void copylinkCsvFolder() {
+
         File csvFileDir = new File(linkCvsDir.getText());
         if (csvFileDir.isDirectory()) {
             copyContentToClipBoard(csvFileDir.getAbsolutePath());

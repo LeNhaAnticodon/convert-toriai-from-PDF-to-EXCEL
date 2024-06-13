@@ -37,6 +37,7 @@ public class ReadPDFToExcel {
     private static String kouSyu;
 
     public static void convertPDFToExcel(String filePDFPath, String fileCSVDirPath, ObservableList<CsvFile> csvFileNames) {
+        csvFileNames.clear();
 
         pdfPath = filePDFPath;
         csvExcelDirPath = fileCSVDirPath;
@@ -346,7 +347,10 @@ public class ReadPDFToExcel {
     private static void writeDataToCSV(Map<Map<StringBuilder, Integer>, Map<StringBuilder, Integer>> kaKouPairs, int timePlus, ObservableList<CsvFile> csvFileNames) {
 
         String[] linkarr = pdfPath.split("\\\\");
-        String csvPath = csvExcelDirPath + "\\" + linkarr[linkarr.length - 1].split("\\.")[0] + " " + kouSyu + ".csv";
+        String fileName = linkarr[linkarr.length - 1].split("\\.")[0] + " " + kouSyu + ".csv";
+        String csvPath = csvExcelDirPath + "\\" + fileName;
+
+        csvFileNames.add(new CsvFile(fileName));
 
         try (CSVWriter writer = new CSVWriter(new OutputStreamWriter(new FileOutputStream(csvPath), Charset.forName("MS932")))) {
 
