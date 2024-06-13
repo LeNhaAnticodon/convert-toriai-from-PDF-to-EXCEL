@@ -1,5 +1,7 @@
 package com.example.convert_toriai_from_pdf_to_excel.convert;
+import com.example.convert_toriai_from_pdf_to_excel.model.CsvFile;
 import com.opencsv.CSVWriter;
+import javafx.collections.ObservableList;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.poi.ss.usermodel.Cell;
@@ -34,7 +36,8 @@ public class ReadPDFToExcel {
 
     private static String kouSyu;
 
-    public static void convertPDFToExcel(String filePDFPath, String fileCSVDirPath) {
+    public static void convertPDFToExcel(String filePDFPath, String fileCSVDirPath, ObservableList<CsvFile> csvFileNames) {
+
         pdfPath = filePDFPath;
         csvExcelDirPath = fileCSVDirPath;
 
@@ -77,7 +80,7 @@ public class ReadPDFToExcel {
 
             if (kaKouPairs != null) {
 //                writeDataToExcel(kaKouPairs, i - 1);
-                writeDataToCSV(kaKouPairs, i - 1);
+                writeDataToCSV(kaKouPairs, i - 1, csvFileNames);
             }
         }
 
@@ -340,7 +343,7 @@ public class ReadPDFToExcel {
         }
     }
 
-    private static void writeDataToCSV(Map<Map<StringBuilder, Integer>, Map<StringBuilder, Integer>> kaKouPairs, int timePlus) {
+    private static void writeDataToCSV(Map<Map<StringBuilder, Integer>, Map<StringBuilder, Integer>> kaKouPairs, int timePlus, ObservableList<CsvFile> csvFileNames) {
 
         String[] linkarr = pdfPath.split("\\\\");
         String csvPath = csvExcelDirPath + "\\" + linkarr[linkarr.length - 1].split("\\.")[0] + " " + kouSyu + ".csv";

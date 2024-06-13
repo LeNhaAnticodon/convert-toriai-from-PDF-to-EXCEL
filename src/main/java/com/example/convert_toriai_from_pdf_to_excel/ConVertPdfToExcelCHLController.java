@@ -3,6 +3,8 @@ package com.example.convert_toriai_from_pdf_to_excel;
 import com.example.convert_toriai_from_pdf_to_excel.convert.ReadPDFToExcel;
 import com.example.convert_toriai_from_pdf_to_excel.dao.SetupData;
 import com.example.convert_toriai_from_pdf_to_excel.model.CsvFile;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +24,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.awt.*;
 import java.io.File;
@@ -65,6 +68,10 @@ public class ConVertPdfToExcelCHLController implements Initializable {
     public Label listCsvFileTitle;
     @FXML
     public MenuBar menuBar;
+    @FXML
+    public Label copyLinkStatusLabel;
+    @FXML
+    public Button copyLinkBtn;
 
     private Map<String, String> languageMap;
 
@@ -94,6 +101,12 @@ public class ConVertPdfToExcelCHLController implements Initializable {
     private static final String ERROR_CONVERT_HEADER = "Nội dung file PDF không phải là tính toán vật liệu hoặc file không được phép truy cập";
     private static final String ERROR_CONVERT_CONTENT = "Bạn có muốn chọn file khác và thực hiện lại không?";
 
+    private static final String ERROR_OPEN_CSV_DIR_TITLE = "Lỗi mở thư mục";
+    private static final String ERROR_COPY_CSV_DIR_TITLE = "Lỗi copy địa chỉ thư mục";
+    private static final String ERROR_CSV_DIR_HEADER = "Thư mục chứa các file EXCEL có địa chỉ không đúng hoặc chưa được chọn!";
+    private static final String ERROR_COPY_CSV_DIR_CONTENT = "Không thể copy địa chỉ thư mục chứa các file EXCEL";
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("link csv " + SetupData.getInstance().getSetup().getLinkSaveCvsFileDir());
@@ -104,7 +117,7 @@ public class ConVertPdfToExcelCHLController implements Initializable {
 
         languageMap = SetupData.getInstance().getLanguageMap();
         controls = SetupData.getInstance().getControls();
-        controls.addAll(getPdfFileBtn, setSaveCsvFileDirBtn, convertFileBtn, openDirCsvBtn, listCsvFileTitle, menuBar);
+        controls.addAll(getPdfFileBtn, setSaveCsvFileDirBtn, convertFileBtn, openDirCsvBtn, listCsvFileTitle, menuBar, copyLinkStatusLabel, copyLinkBtn);
 
         // Load the resource bundle
         bundle = ResourceBundle.getBundle("languagesMap");
@@ -301,7 +314,7 @@ public class ConVertPdfToExcelCHLController implements Initializable {
             }
 
             try {
-                ReadPDFToExcel.convertPDFToExcel(pdfFile.getAbsolutePath(), csvFileDir.getAbsolutePath());
+                ReadPDFToExcel.convertPDFToExcel(pdfFile.getAbsolutePath(), csvFileDir.getAbsolutePath(), SetupData.getInstance().getCsvFiles());
                 confirmAlert.setTitle(CONFIRM_CONVERT_COMPLETE_TITLE);
                 confirmAlert.setHeaderText(CONFIRM_CONVERT_COMPLETE_HEADER);
                 confirmAlert.setContentText(CONFIRM_CONVERT_COMPLETE_CONTENT);
@@ -356,17 +369,21 @@ public class ConVertPdfToExcelCHLController implements Initializable {
                 Desktop.getDesktop().open(csvFileDir);
             } catch (IOException e) {
                 System.out.println(e.getMessage());
-                ;
+                confirmAlert.setAlertType(Alert.AlertType.ERROR);
+                confirmAlert.setTitle(ERROR_OPEN_CSV_DIR_TITLE);
+                confirmAlert.setHeaderText(e.getMessage());
+                confirmAlert.setContentText("");
+                updateLangAlert(confirmAlert);
+                confirmAlert.showAndWait();
+                confirmAlert.setAlertType(Alert.AlertType.CONFIRMATION);
             }
         } else {
             confirmAlert.setAlertType(Alert.AlertType.ERROR);
-
-            confirmAlert.setTitle(ERROR_CONVERT_TITLE);
-            confirmAlert.setHeaderText(ERROR_CONVERT_HEADER);
-            confirmAlert.setContentText(ERROR_CONVERT_CONTENT);
+            confirmAlert.setTitle(ERROR_OPEN_CSV_DIR_TITLE);
+            confirmAlert.setHeaderText(ERROR_CSV_DIR_HEADER);
+            confirmAlert.setContentText("");
             updateLangAlert(confirmAlert);
-            confirmAlert.show();
-
+            confirmAlert.showAndWait();
             confirmAlert.setAlertType(Alert.AlertType.CONFIRMATION);
         }
 
@@ -462,4 +479,29 @@ public class ConVertPdfToExcelCHLController implements Initializable {
         clipboard.setContent(clipboardContent);
     }
 
+    public void copyLinkCsvDir(ActionEvent actionEvent) {
+        File csvFileDir = new File(linkCvsDir.getText());
+        if (csvFileDir.isDirectory()) {
+            copyContentToClipBoard(csvFileDir.getAbsolutePath());
+
+            copyLinkStatusLabel.setVisible(true);
+            // Tạo Timeline để ẩn Label sau 3 giây
+            Timeline timeline = new Timeline(new KeyFrame(
+                    Duration.seconds(3),
+                    event -> copyLinkStatusLabel.setVisible(false) // Ẩn Label sau 3 giây
+            ));
+            // Chạy Timeline một lần
+            timeline.setCycleCount(1);
+            timeline.play();
+        } else {
+            confirmAlert.setAlertType(Alert.AlertType.ERROR);
+            confirmAlert.setTitle(ERROR_COPY_CSV_DIR_TITLE);
+            confirmAlert.setHeaderText(ERROR_CSV_DIR_HEADER);
+            confirmAlert.setContentText(ERROR_COPY_CSV_DIR_CONTENT);
+            updateLangAlert(confirmAlert);
+            confirmAlert.showAndWait();
+            confirmAlert.setAlertType(Alert.AlertType.CONFIRMATION);
+        }
+
+    }
 }

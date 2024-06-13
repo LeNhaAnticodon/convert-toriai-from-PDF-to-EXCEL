@@ -29,7 +29,7 @@ public class SetupData {
         languageMap.put("Chọn file cần chuyển", "Select_the_file_to_transfer");
         languageMap.put("Chọn thư mục lưu file", "Select_the_folder_to_save_the_file");
         languageMap.put("THỰC HIỆN CHUYỂN FILE", "IMPLEMENT_FILE_TRANSFER");
-        languageMap.put("Mở thư mục chứa", "Open_containing_folder");
+        languageMap.put("Mở thư mục chứa các file EXCEL", "Open_the_folder_containing_EXCEL_files");
         languageMap.put("Danh sách file đã chuyển sang excel.csv", "List_of_files_has_been_converted_to_excel_csv");
         languageMap.put("Trợ giúp", "Help");
         languageMap.put("Chỉnh Sửa", "Edit");
@@ -40,22 +40,26 @@ public class SetupData {
         languageMap.put("Xác nhận thư mục chứa các file Excel", "Confirm_the_folder_containing_Excel_files");
         languageMap.put("Địa chỉ thư mục chứa các file Excel chưa được xác nhận", "Folder_address_containing_unconfirmed_Excel_files");
         languageMap.put("Hãy chọn thư mục chứa để tiếp tục!", "Please_select_the_containing_folder_to_continue");
-
         languageMap.put("Thông tin hoạt động chuyển file", "Information_on_file_transfer_activities");
         languageMap.put("Đã chuyển xong file PDF sang các file EXCEL", "Finished_converting_PDF_files_to_EXCEL_files");
         languageMap.put("Bạn có muốn mở thư mục chứa các file EXCEL và\ntự động copy địa chỉ không?", "Do_you_want_to_open_a_folder_containing_EXCEL_files_and_automatically_copy_the_address");
         languageMap.put("Thông báo lỗi chuyển file", "File_transfer_error_message");
         languageMap.put("Nội dung file PDF không phải là tính toán vật liệu hoặc file không được phép truy cập", "The_PDF_file_content_is_not_a_material_calculation_or_the_file_is_not_authorized_to_be_accessed");
         languageMap.put("Bạn có muốn chọn file khác và thực hiện lại không?", "Do_you_want_to_select_another_file_and_do_it_again");
-
         languageMap.put("CHUYỂN ĐỔI FILE PDF TÍNH TOÁN VẬT LIỆU SANG EXCEL CHL", "Convert_material_calculation_PDF_files_to_Excel_CHL");
+        languageMap.put("Lỗi mở thư mục", "Error_opening_folder");
+        languageMap.put("Lỗi copy địa chỉ thư mục", "Error_copying_folder_address");
+        languageMap.put("Thư mục chứa các file EXCEL có địa chỉ không đúng hoặc chưa được chọn!", "The_folder_containing_EXCEL_files_has_an_incorrect_address_or_has_not_been_selected");
+        languageMap.put("Không thể copy địa chỉ thư mục chứa các file EXCEL", "Cannot_copy_folder_address_containing_EXCEL_files");
+        languageMap.put("Copy link thư mục", "Copy_folder_link");
+        languageMap.put("Đã copy link", "The_link_has_been_copied");
 
 
 
         languageMap.put("転送するファイルを選択します", "Select_the_file_to_transfer");
         languageMap.put("ファイルを保存するフォルダーを選択します", "Select_the_folder_to_save_the_file");
         languageMap.put("ファイル転送を実行します", "IMPLEMENT_FILE_TRANSFER");
-        languageMap.put("含まれているフォルダーを開きます", "Open_containing_folder");
+        languageMap.put("EXCELファイルが入っているフォルダーを開きます", "Open_the_folder_containing_EXCEL_files");
         languageMap.put("ファイルのリストがEXCEL.csvに変換されました", "List_of_files_has_been_converted_to_excel_csv");
         languageMap.put("ヘルプ", "Help");
         languageMap.put("編集", "Edit");
@@ -66,22 +70,26 @@ public class SetupData {
         languageMap.put("Excelファイルが入っているフォルダを確認", "Confirm_the_folder_containing_Excel_files");
         languageMap.put("未確認のExcelファイルが入っているフォルダアドレス", "Folder_address_containing_unconfirmed_Excel_files");
         languageMap.put("続行するには、含まれているフォルダーを選択してください。", "Please_select_the_containing_folder_to_continue");
-
         languageMap.put("ファイル転送アクティビティに関する情報", "Information_on_file_transfer_activities");
         languageMap.put("PDFファイルからEXCELファイルへの変換が完了しました", "Finished_converting_PDF_files_to_EXCEL_files");
         languageMap.put("EXCEL ファイルを含むフォルダーを開いて、アドレスを自動的にコピーしますか?", "Do_you_want_to_open_a_folder_containing_EXCEL_files_and_automatically_copy_the_address");
         languageMap.put("ファイル転送エラーメッセージ", "File_transfer_error_message");
         languageMap.put("PDFファイルの内容が材料計算ではないか、ファイルへのアクセスが許可されていません", "The_PDF_file_content_is_not_a_material_calculation_or_the_file_is_not_authorized_to_be_accessed");
         languageMap.put("別のファイルを選択してやり直しますか?", "Do_you_want_to_select_another_file_and_do_it_again");
-
         languageMap.put("材料計算書PDFファイルをExcelCHLに変換", "Convert_material_calculation_PDF_files_to_Excel_CHL");
+        languageMap.put("フォルダを開く際のエラー", "Error_opening_folder");
+        languageMap.put("フォルダアドレスのコピーエラー", "Error_copying_folder_address");
+        languageMap.put("EXCEL ファイルが含まれるフォルダーのアドレスが間違っているか、選択されていません。", "The_folder_containing_EXCEL_files_has_an_incorrect_address_or_has_not_been_selected");
+        languageMap.put("EXCELファイルを含むフォルダーアドレスをコピーできません", "Cannot_copy_folder_address_containing_EXCEL_files");
+        languageMap.put("フォルダーリンクをコピー", "Copy_folder_link");
+        languageMap.put("リンクがコピーされました", "The_link_has_been_copied");
 
 
 
         languageMap.put("Select the file to transfer", "Select_the_file_to_transfer");
         languageMap.put("Select the folder to save the file", "Select_the_folder_to_save_the_file");
         languageMap.put("IMPLEMENT FILE TRANSFER", "IMPLEMENT_FILE_TRANSFER");
-        languageMap.put("Open containing folder", "Open_containing_folder");
+        languageMap.put("Open the folder containing EXCEL files", "Open_the_folder_containing_EXCEL_files");
         languageMap.put("List of files has been converted to excel.csv", "List_of_files_has_been_converted_to_excel_csv");
         languageMap.put("Help", "Help");
         languageMap.put("Edit", "Edit");
@@ -92,15 +100,19 @@ public class SetupData {
         languageMap.put("Confirm the folder containing Excel files", "Confirm_the_folder_containing_Excel_files");
         languageMap.put("Folder address containing unconfirmed Excel files", "Folder_address_containing_unconfirmed_Excel_files");
         languageMap.put("Please select the containing folder to continue!", "Please_select_the_containing_folder_to_continue");
-
         languageMap.put("Information on file transfer activities", "Information_on_file_transfer_activities");
         languageMap.put("Finished converting PDF files to EXCEL files", "Finished_converting_PDF_files_to_EXCEL_files");
         languageMap.put("Do you want to open a folder containing EXCEL files and automatically copy the address?", "Do_you_want_to_open_a_folder_containing_EXCEL_files_and_automatically_copy_the_address");
         languageMap.put("File transfer error message", "File_transfer_error_message");
         languageMap.put("The PDF file content is not a material calculation or the file is not authorized to be accessed", "The_PDF_file_content_is_not_a_material_calculation_or_the_file_is_not_authorized_to_be_accessed");
         languageMap.put("Do you want to select another file and do it again?", "Do_you_want_to_select_another_file_and_do_it_again");
-
         languageMap.put("CONVERT MATERIAL CALCULATION PDF FILES TO EXCEL CHL", "Convert_material_calculation_PDF_files_to_Excel_CHL");
+        languageMap.put("Error opening folder", "Error_opening_folder");
+        languageMap.put("Error copying folder address", "Error_copying_folder_address");
+        languageMap.put("The folder containing EXCEL files has an incorrect address or has not been selected!", "The_folder_containing_EXCEL_files_has_an_incorrect_address_or_has_not_been_selected");
+        languageMap.put("Cannot copy folder address containing EXCEL files", "Cannot_copy_folder_address_containing_EXCEL_files");
+        languageMap.put("Copy folder link", "Copy_folder_link");
+        languageMap.put("The link has been copied", "The_link_has_been_copied");
     }
 
     public static SetupData getInstance() {
