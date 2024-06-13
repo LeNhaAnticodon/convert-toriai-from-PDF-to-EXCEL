@@ -350,7 +350,7 @@ public class ConVertPdfToExcelCHLController implements Initializable {
 
     @FXML
     public void openDirCsv(ActionEvent actionEvent) {
-        File csvFileDir = linkCvsDir
+//        File csvFileDir = linkCvsDir
     }
 
     @FXML
