@@ -12,6 +12,7 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -21,9 +22,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.Duration;
 
 import java.awt.*;
@@ -114,6 +117,7 @@ public class ConVertPdfToExcelCHLController implements Initializable {
         System.out.println("old" + SetupData.getInstance().getSetup().getLinkPdfFile());
 
         csvFIleList.setItems(SetupData.getInstance().getCsvFiles());
+        setupCellCsvFIleList();
 
         languageMap = SetupData.getInstance().getLanguageMap();
         controls = SetupData.getInstance().getControls();
@@ -518,6 +522,44 @@ public class ConVertPdfToExcelCHLController implements Initializable {
             confirmAlert.showAndWait();
             confirmAlert.setAlertType(Alert.AlertType.CONFIRMATION);
         }
+
+    }
+
+    private void setupCellCsvFIleList() {
+        /*gọi hàm setCellFactory để cài đặt lại các thuộc tính của ListView
+            tham số là 1 FunctionalInterface Callback, ta sẽ tạo lớp ẩn danh của
+            Interface này để Override method call của nó
+            cần xác định các thuộc tính để Callback truyền vào cho method call bằng generics với
+            2 thuộc tính lần này là ListView<CsvFile> và ListCell<CsvFile>*/
+        csvFIleList.setCellFactory(new Callback<ListView<CsvFile>, ListCell<CsvFile>>() {
+            @Override
+            public ListCell<CsvFile> call(ListView<CsvFile> CsvFileListView) {
+
+                 /*các ListCell là các phần tử con hay các hàng của list nó extends Labeled
+                 nên có thể định dạng cho nó giống Labeled như màu sắc
+                 ListCell không phải Interface nhưng ta vẫn tạo lớp ẩn danh kế thừa lớp này và
+                 Override method updateItem của nó*/
+                ListCell<CsvFile> cell = new ListCell<CsvFile>() {
+                    @Override
+                    protected void updateItem(CsvFile CsvFile, boolean empty) {
+                        //vẫn giữ lại các cài đặt của lớp cha, chỉ cần sửa một vài giá trị
+                        super.updateItem(CsvFile, empty);
+
+                        if (CsvFile != null && !empty) {
+                            Label label = new Label(CsvFile.getName());
+                            label.setMaxWidth(Double.MAX_VALUE);
+                            label.setAlignment(Pos.BASELINE_CENTER);
+                            setGraphic(label);
+                        } else {
+                            setGraphic(null);
+                        }
+                    }
+                };
+
+                //trả về lớp ẩn danh kế thừa cell trên vừa Override lại các updateItem của nó
+                return cell;
+            }
+        });
 
     }
 }

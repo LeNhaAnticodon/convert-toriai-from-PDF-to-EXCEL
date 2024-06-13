@@ -78,7 +78,7 @@
    <center>
       <VBox alignment="TOP_CENTER" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="listCsvFileTitle" text="Danh sách file đã chuyển sang excel.csv" VBox.vgrow="ALWAYS">
+            <Label fx:id="listCsvFileTitle" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8BC34A;" text="Danh sách file đã chuyển sang excel.csv" textAlignment="CENTER" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="System Italic" size="12.0" />
                </font></Label>
@@ -133,7 +133,7 @@
                <children>
                   <VBox alignment="BOTTOM_LEFT" spacing="5.0" HBox.hgrow="SOMETIMES">
                      <children>
-                        <Label fx:id="copyLinkStatusLabel" visible="false" maxHeight="1.7976931348623157E308" prefWidth="100.0" text="Đã copy link" textFill="#04a138" wrapText="true" VBox.vgrow="SOMETIMES">
+                        <Label fx:id="copyLinkStatusLabel" maxHeight="1.7976931348623157E308" prefWidth="100.0" text="Đã copy link" textFill="#04a138" visible="false" wrapText="true" VBox.vgrow="SOMETIMES">
                            <font>
                               <Font name="System Italic" size="12.0" />
                            </font>
