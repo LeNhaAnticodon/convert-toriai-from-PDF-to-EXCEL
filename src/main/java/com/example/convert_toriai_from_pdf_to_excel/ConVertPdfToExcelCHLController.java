@@ -350,7 +350,26 @@ public class ConVertPdfToExcelCHLController implements Initializable {
 
     @FXML
     public void openDirCsv(ActionEvent actionEvent) {
-//        File csvFileDir = linkCvsDir
+        File csvFileDir = new File(linkCvsDir.getText());
+        if (csvFileDir.isDirectory()) {
+            try {
+                Desktop.getDesktop().open(csvFileDir);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+                ;
+            }
+        } else {
+            confirmAlert.setAlertType(Alert.AlertType.ERROR);
+
+            confirmAlert.setTitle(ERROR_CONVERT_TITLE);
+            confirmAlert.setHeaderText(ERROR_CONVERT_HEADER);
+            confirmAlert.setContentText(ERROR_CONVERT_CONTENT);
+            updateLangAlert(confirmAlert);
+            confirmAlert.show();
+
+            confirmAlert.setAlertType(Alert.AlertType.CONFIRMATION);
+        }
+
     }
 
     @FXML
