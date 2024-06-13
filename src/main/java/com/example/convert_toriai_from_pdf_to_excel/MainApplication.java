@@ -12,10 +12,12 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("convertPdfToExcelCHL.fxml"));
+
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Convert PDF To Excel CHL!");
+        stage.setTitle("CHUYỂN ĐỔI FILE PDF TÍNH TOÁN VẬT LIỆU SANG EXCEL CHL");
         stage.setScene(scene);
         stage.show();
+        ((ConVertPdfToExcelCHLController) fxmlLoader.getController()).getControls().add(stage);
     }
 
     @Override

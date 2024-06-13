@@ -85,8 +85,7 @@ public class ReadPDFToExcel {
 
     private static String[] getFullToriaiText() {
         String[] kakuKouSyu = new String[0];
-        try {
-            PDDocument document = PDDocument.load(new File(pdfPath));
+        try(PDDocument document = PDDocument.load(new File(pdfPath))) {
             if (!document.isEncrypted()) {
                 PDFTextStripper pdfStripper = new PDFTextStripper();
                 String toriaiText = pdfStripper.getText(document);
@@ -337,7 +336,7 @@ public class ReadPDFToExcel {
             workbook.write(fileOut);
             workbook.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());;
         }
     }
 

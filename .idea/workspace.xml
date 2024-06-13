@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1b1403b-b6e3-4111-8e2a-abaec6ff8cc2" name="Changes" comment="" />
+    <list default="true" id="d1b1403b-b6e3-4111-8e2a-abaec6ff8cc2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/setup_data.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup data.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/ConVertPdfToExcelCHLController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/ConVertPdfToExcelCHLController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/convert/ReadPDFToExcel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/convert/ReadPDFToExcel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/dao/SetupData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/dao/SetupData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/languagesMap.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/languagesMap.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,6 +29,8 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
+    <option name="SWAP_SIDES_IN_COMPARE_BRANCHES" value="true" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -83,7 +95,9 @@
       <workItem from="1718086353005" duration="9926000" />
       <workItem from="1718121114894" duration="12790000" />
       <workItem from="1718184235127" duration="4034000" />
-      <workItem from="1718190823980" duration="9475000" />
+      <workItem from="1718190823980" duration="9903000" />
+      <workItem from="1718241667029" duration="5788000" />
+      <workItem from="1718258986579" duration="11964000" />
     </task>
     <servers />
   </component>
@@ -112,6 +126,67 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/ConVertPdfToExcelCHLController.java</url>
+          <line>312</line>
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/ConVertPdfToExcelCHLController.java</url>
+          <line>313</line>
+          <option name="timeStamp" value="77" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/ConVertPdfToExcelCHLController.java</url>
+          <line>314</line>
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/ConVertPdfToExcelCHLController.java</url>
+          <line>315</line>
+          <option name="timeStamp" value="79" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/ConVertPdfToExcelCHLController.java</url>
+          <line>310</line>
+          <option name="timeStamp" value="82" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/ConVertPdfToExcelCHLController.java</url>
+          <line>308</line>
+          <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/ConVertPdfToExcelCHLController.java</url>
+          <line>307</line>
+          <option name="timeStamp" value="85" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/ConVertPdfToExcelCHLController.java</url>
+          <line>306</line>
+          <option name="timeStamp" value="86" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/ConVertPdfToExcelCHLController.java</url>
+          <line>305</line>
+          <option name="timeStamp" value="87" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/ConVertPdfToExcelCHLController.java</url>
+          <line>303</line>
+          <option name="timeStamp" value="88" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/ConVertPdfToExcelCHLController.java</url>
+          <line>304</line>
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
