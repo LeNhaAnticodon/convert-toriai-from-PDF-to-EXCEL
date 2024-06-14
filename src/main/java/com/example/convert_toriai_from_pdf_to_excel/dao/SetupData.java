@@ -54,7 +54,7 @@ public class SetupData {
         languageMap.put("Copy link thư mục", "Copy_folder_link");
         languageMap.put("Đã copy link", "The_link_has_been_copied");
 
-        languageMap.put("Giới thiệu", "About");
+        languageMap.put("Giới thiệu", "AboutController");
         languageMap.put("Đóng", "Close");
 
 
@@ -87,7 +87,7 @@ public class SetupData {
         languageMap.put("フォルダーリンクをコピー", "Copy_folder_link");
         languageMap.put("リンクがコピーされました", "The_link_has_been_copied");
 
-        languageMap.put("情報", "About");
+        languageMap.put("情報", "AboutController");
         languageMap.put("閉じる", "Close");
 
 
@@ -120,7 +120,7 @@ public class SetupData {
         languageMap.put("Copy folder link", "Copy_folder_link");
         languageMap.put("The link has been copied", "The_link_has_been_copied");
 
-        languageMap.put("About", "About");
+        languageMap.put("AboutController", "AboutController");
         languageMap.put("Close", "Close");
     }
 

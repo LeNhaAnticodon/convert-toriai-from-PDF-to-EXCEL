@@ -11,9 +11,13 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -605,5 +609,43 @@ public class ConVertPdfToExcelCHLController implements Initializable {
     public void closeApp(ActionEvent actionEvent) {
         Platform.exit();
         System.exit(0);
+    }
+
+    public void openAbout(ActionEvent actionEvent) throws IOException {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(menuBar.getScene().getWindow());// lấy window đang chạy
+
+        dialog.setTitle("Add new Todo Item");
+
+        // thêm 2 nút ok, cancel vào dialog
+        dialog.setResizable(true);
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(ConVertPdfToExcelCHLController.class.getResource("About.fxml"));// thêm ui fxml
+
+        try {
+            dialog.getDialogPane().setContent(loader.load());// liên kết ui fxml vào dialog
+        } catch (IOException e) {
+            System.out.println("Couldn't load the dialog");
+            e.printStackTrace();
+        }
+        Optional<ButtonType> result = dialog.showAndWait();
+
+//        // nếu là nút ok thì thêm item nhập từ dialog vào listview
+//        if (result.isPresent() && result.get() == ButtonType.OK) {
+//            DialogController controller = loader.getController();// lấy controller của ui fxml
+//            TodoItem newItem = controller.processResult();// nhận TodoItem từ hàm của controller trả về, hàm này đã thêm item vòa list liên kết với listview
+//            todoListView.getSelectionModel().select(newItem);//cho list view chọn item trên
+//        } else {
+//            System.out.println("cancel");
+//        }
+//        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("About.fxml"));
+//        Parent root = (Parent)loader.load();
+//        Stage stage = new Stage();
+//        stage.initOwner(menuBar.getScene().getWindow());
+//        stage.setScene(new Scene(root));
+//        stage.setTitle("Update a Contact");
+//        stage.show();
+
+
     }
 }

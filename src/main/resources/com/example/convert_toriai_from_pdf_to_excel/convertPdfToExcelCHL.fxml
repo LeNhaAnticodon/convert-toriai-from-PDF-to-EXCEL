@@ -32,7 +32,7 @@
                       <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
                         <items>
                           <MenuItem mnemonicParsing="false" onAction="#copyLinkCsvDir" text="Copy link thư mục" />
-                              <MenuItem fx:id="getInfo" mnemonicParsing="false" text="About" />
+                              <MenuItem fx:id="getInfo" mnemonicParsing="false" onAction="#openAbout" text="About" />
                         </items>
                       </Menu>
                       <Menu fx:id="menuEdit" mnemonicParsing="false" text="Edit">
