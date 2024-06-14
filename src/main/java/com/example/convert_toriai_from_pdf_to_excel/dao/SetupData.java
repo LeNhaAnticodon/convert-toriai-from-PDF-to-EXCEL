@@ -53,9 +53,8 @@ public class SetupData {
         languageMap.put("Không thể copy địa chỉ thư mục chứa các file EXCEL", "Cannot_copy_folder_address_containing_EXCEL_files");
         languageMap.put("Copy link thư mục", "Copy_folder_link");
         languageMap.put("Đã copy link", "The_link_has_been_copied");
-        languageMap.put("Giới thiệu", "AboutController");
+        languageMap.put("Giới thiệu", "About");
         languageMap.put("Đóng", "Close");
-
         languageMap.put("Giới thiệu:", "Introduce");
         languageMap.put("Phần mềm chuyển file PDF có nội dung tính vật liệu của thép hình sang các file EXCEL. Từ những thông tin lấy được trong file PDF các File EXCEL sẽ tạo định dạng phù hợp cho phần mềm CHL. Phần mềm CHL sẽ nhập file EXCEL vào để sử dụng.", "Software_to_convert_PDF");
         languageMap.put("Cách sử dụng:", "Using");
@@ -91,9 +90,8 @@ public class SetupData {
         languageMap.put("EXCELファイルを含むフォルダーアドレスをコピーできません", "Cannot_copy_folder_address_containing_EXCEL_files");
         languageMap.put("フォルダーリンクをコピー", "Copy_folder_link");
         languageMap.put("リンクがコピーされました", "The_link_has_been_copied");
-        languageMap.put("情報", "AboutController");
+        languageMap.put("情報", "About");
         languageMap.put("閉じる", "Close");
-
         languageMap.put("紹介します:", "Introduce");
         languageMap.put("形鋼の材料計算内容を記載したPDFファイルをEXCELファイルに変換するソフトウェアです。 PDF ファイルで取得した情報に基づいて、EXCEL ファイルは CHL ソフトウェアに適した形式を作成します。 CHL ソフトウェアは EXCEL ファイルをインポートして使用します。", "Software_to_convert_PDF");
         languageMap.put("使用方法:", "Using");
@@ -129,9 +127,8 @@ public class SetupData {
         languageMap.put("Cannot copy folder address containing EXCEL files", "Cannot_copy_folder_address_containing_EXCEL_files");
         languageMap.put("Copy folder link", "Copy_folder_link");
         languageMap.put("The link has been copied", "The_link_has_been_copied");
-        languageMap.put("AboutController", "AboutController");
+        languageMap.put("About", "About");
         languageMap.put("Close", "Close");
-
         languageMap.put("Introduce:", "Introduce");
         languageMap.put("Software to convert PDF files containing material calculation content of shaped steel to EXCEL files. From the information obtained in the PDF file, the EXCEL File will create a suitable format for CHL software. CHL software will import the EXCEL file for use.", "Software_to_convert_PDF");
         languageMap.put("Using:", "Using");

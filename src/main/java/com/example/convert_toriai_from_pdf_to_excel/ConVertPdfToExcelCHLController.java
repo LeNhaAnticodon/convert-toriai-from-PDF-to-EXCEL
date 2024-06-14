@@ -518,6 +518,12 @@ public class ConVertPdfToExcelCHLController implements Initializable {
                 if (keyTitle != null) {
                     stage.setTitle(bundle.getString(keyTitle + "." + lang));
                 }
+            } else if (control instanceof Dialog dialog) {
+                String title = dialog.getTitle();
+                String keyTitle = languageMap.get(title);
+                if (keyTitle != null) {
+                    dialog.setTitle(bundle.getString(keyTitle + "." + lang));
+                }
             }
         }
     }
