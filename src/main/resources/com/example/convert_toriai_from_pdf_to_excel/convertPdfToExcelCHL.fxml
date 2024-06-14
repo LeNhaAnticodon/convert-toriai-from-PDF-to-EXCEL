@@ -31,17 +31,21 @@
                     <menus>
                       <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
                         <items>
-                          <MenuItem mnemonicParsing="false" text="About" />
+                          <MenuItem mnemonicParsing="false" onAction="#copyLinkCsvDir" text="Copy link thư mục" />
+                              <MenuItem fx:id="getInfo" mnemonicParsing="false" text="About" />
                         </items>
                       </Menu>
                       <Menu fx:id="menuEdit" mnemonicParsing="false" text="Edit">
                         <items>
-                          <MenuItem mnemonicParsing="false" text="Delete" />
+                          <MenuItem mnemonicParsing="false" onAction="#getPdfFile" text="Chọn file cần chuyển" />
+                              <MenuItem mnemonicParsing="false" onAction="#setSaveCsvFileDir" text="Chọn thư mục lưu file" />
                         </items>
                       </Menu>
                       <Menu fx:id="menuFile" mnemonicParsing="false" text="File">
                         <items>
-                          <MenuItem mnemonicParsing="false" text="Close" />
+                          <MenuItem mnemonicParsing="false" onAction="#convertFile" text="THỰC HIỆN CHUYỂN FILE" />
+                              <MenuItem mnemonicParsing="false" onAction="#openDirCsv" text="Open the folder containing EXCEL files" />
+                              <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Đóng" />
                         </items>
                       </Menu>
                     </menus>

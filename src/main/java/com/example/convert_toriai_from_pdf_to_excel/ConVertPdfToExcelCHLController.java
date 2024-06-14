@@ -562,4 +562,7 @@ public class ConVertPdfToExcelCHLController implements Initializable {
         });
 
     }
+
+    public void closeApp(ActionEvent actionEvent) {
+    }
 }
