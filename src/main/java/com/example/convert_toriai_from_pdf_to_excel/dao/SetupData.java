@@ -53,9 +53,14 @@ public class SetupData {
         languageMap.put("Không thể copy địa chỉ thư mục chứa các file EXCEL", "Cannot_copy_folder_address_containing_EXCEL_files");
         languageMap.put("Copy link thư mục", "Copy_folder_link");
         languageMap.put("Đã copy link", "The_link_has_been_copied");
-
         languageMap.put("Giới thiệu", "AboutController");
         languageMap.put("Đóng", "Close");
+
+        languageMap.put("Giới thiệu:", "Introduce");
+        languageMap.put("Phần mềm chuyển file PDF có nội dung tính vật liệu của thép hình sang các file EXCEL. Từ những thông tin lấy được trong file PDF các File EXCEL sẽ tạo định dạng phù hợp cho phần mềm CHL. Phần mềm CHL sẽ nhập file EXCEL vào để sử dụng.", "Software_to_convert_PDF");
+        languageMap.put("Cách sử dụng:", "Using");
+        languageMap.put("chọn địa chỉ file PDF có nội dung tính vật liệu trên máy và chọn địa chỉ thư mục sẽ chứa các file EXCEL khi chuyển xong. Các link này sau khi được chọn sẽ hiển thị ở các ô bên trái. Sau đó ấn vào nút chuyển để thực hiện. Các file EXCEL tạo ra sẽ hiển thị trong danh sách bên trái. Có thể nhấn nút Copy link thư mục sẽ chứa các file EXCEL hoặc ấn nút mở thư mục chứa các file EXCEL để mở cửa sổ thư mục này.", "Select_the_PDF");
+        languageMap.put("Thực hiện: Lê Nhã", "copyright");
 
 
 
@@ -86,9 +91,14 @@ public class SetupData {
         languageMap.put("EXCELファイルを含むフォルダーアドレスをコピーできません", "Cannot_copy_folder_address_containing_EXCEL_files");
         languageMap.put("フォルダーリンクをコピー", "Copy_folder_link");
         languageMap.put("リンクがコピーされました", "The_link_has_been_copied");
-
         languageMap.put("情報", "AboutController");
         languageMap.put("閉じる", "Close");
+
+        languageMap.put("紹介します:", "Introduce");
+        languageMap.put("形鋼の材料計算内容を記載したPDFファイルをEXCELファイルに変換するソフトウェアです。 PDF ファイルで取得した情報に基づいて、EXCEL ファイルは CHL ソフトウェアに適した形式を作成します。 CHL ソフトウェアは EXCEL ファイルをインポートして使用します。", "Software_to_convert_PDF");
+        languageMap.put("使用方法:", "Using");
+        languageMap.put("パソコン上の材料計算コンテンツが含まれる PDF ファイルのアドレスを選択し、転送が完了したときに EXCEL ファイルが含まれるフォルダーのアドレスを選択します。これらのリンクを選択すると、左側のボックスに表示されます。その後、スイッチボタンを押して実行します。作成したEXCELファイルが左側のリストに表示されます。 EXCEL ファイルを含むフォルダーへのリンクのコピー ボタンを押すか、EXCEL ファイルを含むフォルダーを開くボタンを押して、このフォルダー ウィンドウを開くことができます。", "Select_the_PDF");
+        languageMap.put("作者: ル・ニャ", "copyright");
 
 
 
@@ -119,9 +129,14 @@ public class SetupData {
         languageMap.put("Cannot copy folder address containing EXCEL files", "Cannot_copy_folder_address_containing_EXCEL_files");
         languageMap.put("Copy folder link", "Copy_folder_link");
         languageMap.put("The link has been copied", "The_link_has_been_copied");
-
         languageMap.put("AboutController", "AboutController");
         languageMap.put("Close", "Close");
+
+        languageMap.put("Introduce:", "Introduce");
+        languageMap.put("Software to convert PDF files containing material calculation content of shaped steel to EXCEL files. From the information obtained in the PDF file, the EXCEL File will create a suitable format for CHL software. CHL software will import the EXCEL file for use.", "Software_to_convert_PDF");
+        languageMap.put("Using:", "Using");
+        languageMap.put("Select the PDF file address containing the material calculation content on your computer and select the folder address that will contain the EXCEL files when the transfer is complete. These links, once selected, will be displayed in the boxes on the left. Then press the switch button to execute. The created EXCEL files will display in the list on the left. You can press the Copy link button to the folder that will contain EXCEL files or press the button to open the folder containing EXCEL files to open this folder window.", "Select_the_PDF");
+        languageMap.put("copyright ©: Le Nha", "copyright");
     }
 
     public static SetupData getInstance() {

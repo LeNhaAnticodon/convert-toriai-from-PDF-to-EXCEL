@@ -14,8 +14,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
@@ -26,6 +24,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -33,9 +33,14 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Duration;
 
+import javafx.scene.image.Image;
+
+import javafx.scene.image.ImageView;
+
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Map;
 import java.util.Optional;
@@ -446,7 +451,7 @@ public class ConVertPdfToExcelCHLController implements Initializable {
     public void setLangEnglish(ActionEvent actionEvent) {
     }
 
-    private void updateLangInBackground(Toggle langBtn, ObservableList<Object> controls) {
+    public void updateLangInBackground(Toggle langBtn, ObservableList<Object> controls) {
         String lang = langBtn.getUserData().toString();
         Task<Void> task = new Task<>() {
             @Override
@@ -588,11 +593,30 @@ public class ConVertPdfToExcelCHLController implements Initializable {
 
                         if (CsvFile != null && !empty) {
                             Label label = new Label(CsvFile.getName());
-                            label.setMaxWidth(Double.MAX_VALUE);
-                            label.setAlignment(Pos.BASELINE_CENTER);
-                            label.setStyle("-fx-font-weight: bold; -fx-background-color: #DCEDC8; -fx-padding: 3 3 3 3");
+//                            label.setMaxWidth(Double.MAX_VALUE);
+                            label.setAlignment(Pos.CENTER);
+//                            label.setStyle("-fx-font-weight: bold; -fx-background-color: #DCEDC8; -fx-padding: 3 3 3 3");
                             label.setTextFill(Color.BLUE);
-                            setGraphic(label);
+
+                            HBox hBox = new HBox();
+                            hBox.setAlignment(Pos.CENTER);
+                            hBox.setMaxWidth(Double.MAX_VALUE);
+                            hBox.setStyle("-fx-font-weight: bold; -fx-background-color: #DCEDC8; -fx-padding: 3 3 3 3");
+
+                            Class<ConVertPdfToExcelCHLController> clazz = ConVertPdfToExcelCHLController.class;
+                            InputStream input = clazz.getResourceAsStream("/com/example/convert_toriai_from_pdf_to_excel/ICON/ok.png");
+
+                            Image image = new Image(input);
+
+                            ImageView imageView = new ImageView(image);
+                            imageView.setFitWidth(25);
+                            imageView.setFitHeight(25);
+
+                            hBox.getChildren().add(label);
+                            hBox.getChildren().add(imageView);
+                            hBox.setSpacing(10);
+                            setGraphic(hBox);
+
                         } else {
                             setGraphic(null);
                         }
@@ -611,13 +635,12 @@ public class ConVertPdfToExcelCHLController implements Initializable {
         System.exit(0);
     }
 
-    public void openAbout(ActionEvent actionEvent) throws IOException {
-        Dialog<ButtonType> dialog = new Dialog<>();
+    public void openAbout(ActionEvent actionEvent) {
+        Dialog<Object> dialog = new Dialog<>();
         dialog.initOwner(menuBar.getScene().getWindow());// lấy window đang chạy
 
-        dialog.setTitle("Add new Todo Item");
+        dialog.setTitle("About");
 
-        // thêm 2 nút ok, cancel vào dialog
         dialog.setResizable(true);
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(ConVertPdfToExcelCHLController.class.getResource("About.fxml"));// thêm ui fxml
@@ -628,7 +651,11 @@ public class ConVertPdfToExcelCHLController implements Initializable {
             System.out.println("Couldn't load the dialog");
             e.printStackTrace();
         }
-        Optional<ButtonType> result = dialog.showAndWait();
+
+        AboutController controller = loader.getController();
+        controller.init(this, dialog);
+        
+        dialog.show();
 
 //        // nếu là nút ok thì thêm item nhập từ dialog vào listview
 //        if (result.isPresent() && result.get() == ButtonType.OK) {

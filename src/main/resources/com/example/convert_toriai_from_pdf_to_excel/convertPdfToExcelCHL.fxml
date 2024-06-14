@@ -113,7 +113,7 @@
                         </DropShadow>
                      </effect>
                   </Button>
-                  <Button fx:id="openDirCsvBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="75.0" mnemonicParsing="false" onAction="#openDirCsv" prefWidth="168.0" style="-fx-background-radius: 20;" text="Open the folder containing EXCEL files" textAlignment="CENTER" textFill="#0463e8" wrapText="true">
+                  <Button fx:id="openDirCsvBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="75.0" mnemonicParsing="false" onAction="#openDirCsv" prefWidth="168.0" style="-fx-background-radius: 20;" text="Mở thư mục chứa các file EXCEL" textAlignment="CENTER" textFill="#0463e8" wrapText="true">
                      <font>
                         <Font name="Tahoma Bold" size="12.9" />
                      </font>
