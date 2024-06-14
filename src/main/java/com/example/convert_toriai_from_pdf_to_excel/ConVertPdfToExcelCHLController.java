@@ -273,9 +273,15 @@ public class ConVertPdfToExcelCHLController implements Initializable {
     @FXML
     public File setSaveCsvFileDir() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
+        String oldDir = SetupData.getInstance().getSetup().getLinkSaveCvsFileDir();
+        File oldFileDir = new File(oldDir);
+        if (oldFileDir.isDirectory()) {
+            directoryChooser.setInitialDirectory(oldFileDir);
+        }
+
         File dir = directoryChooser.showDialog(menuBar.getScene().getWindow());
 
-        if (dir != null) {
+        if (dir != null && dir.isDirectory()) {
             String link = dir.getAbsolutePath();
             linkCvsDir.setText(link);
             SetupData.getInstance().setLinkSaveCvsFileDir(link);
