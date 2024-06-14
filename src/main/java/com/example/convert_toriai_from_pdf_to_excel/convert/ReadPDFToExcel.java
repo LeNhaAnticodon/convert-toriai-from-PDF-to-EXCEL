@@ -36,6 +36,8 @@ public class ReadPDFToExcel {
 
     private static String kouSyu;
 
+    private static String kouSyuName;
+
     public static void convertPDFToExcel(String filePDFPath, String fileCSVDirPath, ObservableList<CsvFile> csvFileNames) {
         csvFileNames.clear();
 
@@ -80,7 +82,7 @@ public class ReadPDFToExcel {
             Map<Map<StringBuilder, Integer>, Map<StringBuilder, Integer>> kaKouPairs = getToriaiData(kakuKakou);
 
             if (kaKouPairs != null) {
-//                writeDataToExcel(kaKouPairs, i - 1);
+//                writeDataToExcel(kaKouPairs, i - 1, csvFileNames);
                 writeDataToCSV(kaKouPairs, i - 1, csvFileNames);
             }
         }
@@ -123,7 +125,7 @@ public class ReadPDFToExcel {
 
         kouSyu = extractValue(kakuKakou[0].split("\n")[0], "法:", "梱包");
         String[] kouSyuNameAndSize = kouSyu.split("-");
-        String kouSyuName = kouSyuNameAndSize[0].trim();
+        kouSyuName = kouSyuNameAndSize[0].trim();
 
         switch (kouSyuName) {
             case "K":
@@ -239,7 +241,7 @@ public class ReadPDFToExcel {
         return kaKouPairs;
     }
 
-    private static void writeDataToExcel(Map<Map<StringBuilder, Integer>, Map<StringBuilder, Integer>> kaKouPairs, int timePlus) {
+    private static void writeDataToExcel(Map<Map<StringBuilder, Integer>, Map<StringBuilder, Integer>> kaKouPairs, int timePlus, ObservableList<CsvFile> csvFileNames) {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Sheet1");
 
@@ -334,7 +336,10 @@ public class ReadPDFToExcel {
         lastRow.createCell(3).setCellValue(0);
 
         String[] linkarr = pdfPath.split("\\\\");
-        String excelPath = csvExcelDirPath + "\\" + linkarr[linkarr.length - 1].split("\\.")[0] + " " + kouSyu + ".xlsx";
+        String fileName = linkarr[linkarr.length - 1].split("\\.")[0] + " " + kouSyu + ".csv";
+        String excelPath = csvExcelDirPath + "\\" + fileName;
+
+        csvFileNames.add(new CsvFile(fileName, kouSyuName));
 
         try (FileOutputStream fileOut = new FileOutputStream(excelPath)) {
             workbook.write(fileOut);
@@ -350,7 +355,7 @@ public class ReadPDFToExcel {
         String fileName = linkarr[linkarr.length - 1].split("\\.")[0] + " " + kouSyu + ".csv";
         String csvPath = csvExcelDirPath + "\\" + fileName;
 
-        csvFileNames.add(new CsvFile(fileName));
+        csvFileNames.add(new CsvFile(fileName, kouSyuName));
 
         try (CSVWriter writer = new CSVWriter(new OutputStreamWriter(new FileOutputStream(csvPath), Charset.forName("MS932")))) {
 

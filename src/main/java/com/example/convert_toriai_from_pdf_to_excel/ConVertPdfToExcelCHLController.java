@@ -587,12 +587,12 @@ public class ConVertPdfToExcelCHLController implements Initializable {
                  Override method updateItem của nó*/
                 ListCell<CsvFile> cell = new ListCell<CsvFile>() {
                     @Override
-                    protected void updateItem(CsvFile CsvFile, boolean empty) {
+                    protected void updateItem(CsvFile csvFile, boolean empty) {
                         //vẫn giữ lại các cài đặt của lớp cha, chỉ cần sửa một vài giá trị
-                        super.updateItem(CsvFile, empty);
+                        super.updateItem(csvFile, empty);
 
-                        if (CsvFile != null && !empty) {
-                            Label label = new Label(CsvFile.getName());
+                        if (csvFile != null && !empty) {
+                            Label label = new Label(csvFile.getName());
 //                            label.setMaxWidth(Double.MAX_VALUE);
                             label.setAlignment(Pos.CENTER);
 //                            label.setStyle("-fx-font-weight: bold; -fx-background-color: #DCEDC8; -fx-padding: 3 3 3 3");
@@ -606,16 +606,39 @@ public class ConVertPdfToExcelCHLController implements Initializable {
                             Class<ConVertPdfToExcelCHLController> clazz = ConVertPdfToExcelCHLController.class;
                             InputStream input = clazz.getResourceAsStream("/com/example/convert_toriai_from_pdf_to_excel/ICON/ok.png");
 
-                            Image image = new Image(input);
+                            String koSyuName = csvFile.getKouSyuName();
+                            if (koSyuName.equalsIgnoreCase("[")) {
+                                input = clazz.getResourceAsStream("/com/example/convert_toriai_from_pdf_to_excel/ICON/U.png");
+                            } else if (koSyuName.equalsIgnoreCase("C")) {
+                                input = clazz.getResourceAsStream("/com/example/convert_toriai_from_pdf_to_excel/ICON/C.png");
+                            } else if (koSyuName.equalsIgnoreCase("K")) {
+                                input = clazz.getResourceAsStream("/com/example/convert_toriai_from_pdf_to_excel/ICON/P.png");
+                            } else if (koSyuName.equalsIgnoreCase("L")) {
+                                input = clazz.getResourceAsStream("/com/example/convert_toriai_from_pdf_to_excel/ICON/L.png");
+                            } else if (koSyuName.equalsIgnoreCase("H")) {
+                                input = clazz.getResourceAsStream("/com/example/convert_toriai_from_pdf_to_excel/ICON/H.png");
+                            } else if (koSyuName.equalsIgnoreCase("FB")) {
+                                input = clazz.getResourceAsStream("/com/example/convert_toriai_from_pdf_to_excel/ICON/FB.png");
+                            } else if (koSyuName.equalsIgnoreCase("CA")) {
+                                input = clazz.getResourceAsStream("/com/example/convert_toriai_from_pdf_to_excel/ICON/CA.png");
+                            }
 
-                            ImageView imageView = new ImageView(image);
-                            imageView.setFitWidth(25);
-                            imageView.setFitHeight(25);
+                            Image image;
 
-                            hBox.getChildren().add(label);
-                            hBox.getChildren().add(imageView);
-                            hBox.setSpacing(10);
-                            setGraphic(hBox);
+                            try {
+                                assert input != null;
+                                image = new Image(input);
+                                ImageView imageView = new ImageView(image);
+                                imageView.setFitWidth(25);
+                                imageView.setFitHeight(25);
+
+                                hBox.getChildren().add(label);
+                                hBox.getChildren().add(imageView);
+                                hBox.setSpacing(10);
+                                setGraphic(hBox);
+                            } catch (NullPointerException e) {
+                                System.out.println(e.getMessage());
+                            }
 
                         } else {
                             setGraphic(null);
@@ -654,7 +677,7 @@ public class ConVertPdfToExcelCHLController implements Initializable {
 
         AboutController controller = loader.getController();
         controller.init(this, dialog);
-        
+
         dialog.show();
 
 //        // nếu là nút ok thì thêm item nhập từ dialog vào listview
