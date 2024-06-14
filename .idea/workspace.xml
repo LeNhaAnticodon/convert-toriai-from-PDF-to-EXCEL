@@ -6,14 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="d1b1403b-b6e3-4111-8e2a-abaec6ff8cc2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup_data.dat" beforeDir="false" afterPath="$PROJECT_DIR$/setup_data.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/AboutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/AboutController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/ConVertPdfToExcelCHLController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/ConVertPdfToExcelCHLController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/dao/SetupData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/dao/SetupData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/convert_toriai_from_pdf_to_excel/ICON/3d working people construction worker.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/convert_toriai_from_pdf_to_excel/ICON/3d WorkingPeople ConstructionWorker.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/convert_toriai_from_pdf_to_excel/ICON/U C.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/convert_toriai_from_pdf_to_excel/ICON/UC.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/convert_toriai_from_pdf_to_excel/about.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/convert_toriai_from_pdf_to_excel/about.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/convert_toriai_from_pdf_to_excel/convertPdfToExcelCHL.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/convert_toriai_from_pdf_to_excel/convertPdfToExcelCHL.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +106,7 @@
       <workItem from="1718345918832" duration="14319000" />
       <workItem from="1718362031950" duration="3267000" />
       <workItem from="1718365339871" duration="415000" />
-      <workItem from="1718365784527" duration="1793000" />
+      <workItem from="1718365784527" duration="2765000" />
     </task>
     <servers />
   </component>

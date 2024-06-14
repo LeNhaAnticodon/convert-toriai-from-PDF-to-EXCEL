@@ -17,7 +17,7 @@
          <children>
             <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="SOMETIMES">
                <image>
-                  <Image url="@ICON/3d%20working%20people%20construction%20worker.png" />
+                  <Image url="@ICON/3d WorkingPeople ConstructionWorker.png" />
                </image>
                <viewport>
                   <Rectangle2D />
@@ -88,7 +88,7 @@
                   </ImageView>
                   <ImageView fitHeight="55.0" fitWidth="55.0" layoutX="288.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@ICON/U%20C.png" />
+                        <Image url="@ICON/UC.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="55.0" fitWidth="55.0" layoutX="315.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">

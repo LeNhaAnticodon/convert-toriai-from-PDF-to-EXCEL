@@ -672,7 +672,7 @@ public class ConVertPdfToExcelCHLController implements Initializable {
 
         dialog.setResizable(true);
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(ConVertPdfToExcelCHLController.class.getResource("About.fxml"));// thêm ui fxml
+        loader.setLocation(ConVertPdfToExcelCHLController.class.getResource("/com/example/convert_toriai_from_pdf_to_excel/about.fxml"));// thêm ui fxml
 
         try {
             dialog.getDialogPane().setContent(loader.load());// liên kết ui fxml vào dialog
