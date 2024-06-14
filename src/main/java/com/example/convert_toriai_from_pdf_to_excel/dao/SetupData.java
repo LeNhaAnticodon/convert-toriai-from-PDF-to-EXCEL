@@ -30,7 +30,7 @@ public class SetupData {
         languageMap.put("Chọn thư mục lưu file", "Select_the_folder_to_save_the_file");
         languageMap.put("THỰC HIỆN CHUYỂN FILE", "IMPLEMENT_FILE_TRANSFER");
         languageMap.put("Mở thư mục chứa các file EXCEL", "Open_the_folder_containing_EXCEL_files");
-        languageMap.put("Danh sách file đã chuyển sang excel.csv", "List_of_files_has_been_converted_to_excel_csv");
+        languageMap.put("Danh sách file đã chuyển sang EXCEL.csv", "List_of_files_has_been_converted_to_excel_csv");
         languageMap.put("Trợ giúp", "Help");
         languageMap.put("Chỉnh Sửa", "Edit");
         languageMap.put("Tệp", "File");
@@ -96,7 +96,7 @@ public class SetupData {
         languageMap.put("Select the folder to save the file", "Select_the_folder_to_save_the_file");
         languageMap.put("IMPLEMENT FILE TRANSFER", "IMPLEMENT_FILE_TRANSFER");
         languageMap.put("Open the folder containing EXCEL files", "Open_the_folder_containing_EXCEL_files");
-        languageMap.put("List of files has been converted to excel.csv", "List_of_files_has_been_converted_to_excel_csv");
+        languageMap.put("List of files has been converted to EXCEL.csv", "List_of_files_has_been_converted_to_excel_csv");
         languageMap.put("Help", "Help");
         languageMap.put("Edit", "Edit");
         languageMap.put("File", "File");

@@ -22,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -585,6 +586,8 @@ public class ConVertPdfToExcelCHLController implements Initializable {
                             Label label = new Label(CsvFile.getName());
                             label.setMaxWidth(Double.MAX_VALUE);
                             label.setAlignment(Pos.BASELINE_CENTER);
+                            label.setStyle("-fx-font-weight: bold; -fx-background-color: #DCEDC8; -fx-padding: 3 3 3 3");
+                            label.setTextFill(Color.BLUE);
                             setGraphic(label);
                         } else {
                             setGraphic(null);
