@@ -54,6 +54,9 @@ public class SetupData {
         languageMap.put("Copy link thư mục", "Copy_folder_link");
         languageMap.put("Đã copy link", "The_link_has_been_copied");
 
+        languageMap.put("Giới thiệu", "About");
+        languageMap.put("Đóng", "Close");
+
 
 
         languageMap.put("転送するファイルを選択します", "Select_the_file_to_transfer");
@@ -84,6 +87,9 @@ public class SetupData {
         languageMap.put("フォルダーリンクをコピー", "Copy_folder_link");
         languageMap.put("リンクがコピーされました", "The_link_has_been_copied");
 
+        languageMap.put("情報", "About");
+        languageMap.put("閉じる", "Close");
+
 
 
         languageMap.put("Select the file to transfer", "Select_the_file_to_transfer");
@@ -113,6 +119,9 @@ public class SetupData {
         languageMap.put("Cannot copy folder address containing EXCEL files", "Cannot_copy_folder_address_containing_EXCEL_files");
         languageMap.put("Copy folder link", "Copy_folder_link");
         languageMap.put("The link has been copied", "The_link_has_been_copied");
+
+        languageMap.put("About", "About");
+        languageMap.put("Close", "Close");
     }
 
     public static SetupData getInstance() {

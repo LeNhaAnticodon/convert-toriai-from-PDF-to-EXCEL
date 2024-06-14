@@ -22,12 +22,12 @@
    <top>
       <VBox alignment="TOP_RIGHT" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="TOP_RIGHT" style="-fx-background-color: #FFFFFF;" VBox.vgrow="NEVER">
+            <HBox alignment="TOP_RIGHT" style="-fx-background-color: #B2EBF2;" VBox.vgrow="NEVER">
                <VBox.margin>
                   <Insets bottom="20.0" />
                </VBox.margin>
                <children>
-                  <MenuBar fx:id="menuBar" cache="true" maxWidth="-Infinity" style="-fx-background-color: #FFFFFF;">
+                  <MenuBar fx:id="menuBar" cache="true" maxWidth="-Infinity" style="-fx-background-color: #B2EBF2; -fx-font-weight: bold;">
                     <menus>
                       <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
                         <items>
@@ -84,7 +84,7 @@
          <children>
             <Label fx:id="listCsvFileTitle" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8BC34A;" text="Danh sách file đã chuyển sang excel.csv" textAlignment="CENTER" VBox.vgrow="ALWAYS">
                <font>
-                  <Font name="System Italic" size="12.0" />
+                  <Font name="System Bold Italic" size="12.0" />
                </font></Label>
             <ListView fx:id="csvFIleList" style="-fx-background-radius: 5;" VBox.vgrow="SOMETIMES" />
          </children>

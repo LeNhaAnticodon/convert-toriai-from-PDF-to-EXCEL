@@ -22,7 +22,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -157,11 +156,48 @@ public class ConVertPdfToExcelCHLController implements Initializable {
             }
         });
 
+        linkPdfFile.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            setBorderColorTF(linkPdfFile);
+        });
+
+        linkCvsDir.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            setBorderColorTF(linkCvsDir);
+        });
+
         File fileCsvDiv = new File(SetupData.getInstance().getSetup().getLinkSaveCvsFileDir());
 
         if (fileCsvDiv.isDirectory()) {
             linkCvsDir.setText(SetupData.getInstance().getSetup().getLinkSaveCvsFileDir());
         }
+    }
+
+    private void setBorderColorTF(TextField textField) {
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() {
+                Platform.runLater(() -> {
+                    textField.setStyle("-fx-border-color: #FFA000; -fx-border-width: 2; -fx-border-radius: 5");
+                    // Tạo Timeline để ẩn Label sau 3 giây
+                    Timeline timeline = new Timeline(new KeyFrame(
+                            Duration.seconds(3),
+                            event -> {
+                                textField.setStyle("-fx-border-color:  none");
+//                                textField.setStyle("-fx-border-width:  none");
+//                                textField.setStyle("-fx-border-radius:  none");
+                            } // Ẩn Label sau 3 giây
+                    ));
+                    // Chạy Timeline một lần
+                    timeline.setCycleCount(1);
+                    timeline.play();
+
+                });
+                return null;
+            }
+        };
+
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
     }
 
     private void setlang() {
@@ -564,5 +600,7 @@ public class ConVertPdfToExcelCHLController implements Initializable {
     }
 
     public void closeApp(ActionEvent actionEvent) {
+        Platform.exit();
+        System.exit(0);
     }
 }
