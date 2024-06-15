@@ -234,10 +234,37 @@ public class SetupData {
 //            Files.createFile(path);
 //        }
 
+        // Tạo đối tượng File đại diện cho file cần xóa
+        File file = new File(FILE_SETUP_NAME);
+
+        // Kiểm tra nếu file tồn tại và xóa nó
+        // vì file là readonly nên cần xóa đi tạo file mới
+        if (file.exists()) {
+            if (file.delete()) {
+                System.out.println("File đã được xóa thành công.");
+            } else {
+                System.out.println("Xóa file thất bại.");
+            }
+        } else {
+            System.out.println("File không tồn tại.");
+        }
         try (DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(Files.newOutputStream(path)))) {
                 dos.writeUTF(setup.getLinkPdfFile());
                 dos.writeUTF(setup.getLinkSaveCvsFileDir());
                 dos.writeUTF(setup.getLang());
+        }
+
+        // Đặt quyền chỉ đọc cho file, để không chỉnh sửa file
+        File readOnly = new File(FILE_SETUP_NAME);
+        if (readOnly.exists()) {
+            boolean result = readOnly.setReadOnly();
+            if (result) {
+                System.out.println("File is set to read-only.");
+            } else {
+                System.out.println("Failed to set file to read-only.");
+            }
+        } else {
+            System.out.println("File does not exist.");
         }
     }
 
