@@ -249,8 +249,12 @@ public class ConVertPdfToExcelCHLController implements Initializable {
             }
         }
 
-        if (file != null) {
+        if (file != null && file.isFile()) {
             String link = file.getAbsolutePath();
+            // nếu địa chỉ link của file được chọn khác với địa chỉ cũ đang được chọn thì xóa danh sách list các file csv
+            if (!link.equals(SetupData.getInstance().getSetup().getLinkPdfFile())) {
+                SetupData.getInstance().getCsvFiles().clear();
+            }
             linkPdfFile.setText(link);
             SetupData.getInstance().setLinkPdfFile(link);
 
@@ -282,7 +286,14 @@ public class ConVertPdfToExcelCHLController implements Initializable {
         File dir = directoryChooser.showDialog(menuBar.getScene().getWindow());
 
         if (dir != null && dir.isDirectory()) {
+
             String link = dir.getAbsolutePath();
+
+            // nếu địa chỉ link của thư mục được chọn khác với địa chỉ cũ đang được chọn thì xóa danh sách list các file csv
+            if (!link.equals(SetupData.getInstance().getSetup().getLinkSaveCvsFileDir())) {
+                SetupData.getInstance().getCsvFiles().clear();
+            }
+
             linkCvsDir.setText(link);
             SetupData.getInstance().setLinkSaveCvsFileDir(link);
         } else {
