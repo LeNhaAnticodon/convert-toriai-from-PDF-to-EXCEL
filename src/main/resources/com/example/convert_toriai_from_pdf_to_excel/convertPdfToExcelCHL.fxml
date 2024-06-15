@@ -18,7 +18,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.convert_toriai_from_pdf_to_excel.ConVertPdfToExcelCHLController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.convert_toriai_from_pdf_to_excel.ConVertPdfToExcelCHLController">
    <top>
       <VBox alignment="TOP_RIGHT" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
@@ -31,20 +31,20 @@
                     <menus>
                       <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
                         <items>
-                          <MenuItem mnemonicParsing="false" onAction="#copyLinkCsvDir" text="Copy link thư mục" />
+                          <MenuItem mnemonicParsing="false" onAction="#copyLinkChlDir" text="Copy link thư mục" />
                               <MenuItem fx:id="getInfo" mnemonicParsing="false" onAction="#openAbout" text="About" />
                         </items>
                       </Menu>
                       <Menu fx:id="menuEdit" mnemonicParsing="false" text="Edit">
                         <items>
                           <MenuItem mnemonicParsing="false" onAction="#getPdfFile" text="Chọn file cần chuyển" />
-                              <MenuItem mnemonicParsing="false" onAction="#setSaveCsvFileDir" text="Chọn thư mục lưu file" />
+                              <MenuItem mnemonicParsing="false" onAction="#setSaveChlFileDir" text="Chọn thư mục lưu file" />
                         </items>
                       </Menu>
                       <Menu fx:id="menuFile" mnemonicParsing="false" text="File">
                         <items>
                           <MenuItem mnemonicParsing="false" onAction="#convertFile" text="THỰC HIỆN CHUYỂN FILE" />
-                              <MenuItem mnemonicParsing="false" onAction="#openDirCsv" text="Open the folder containing EXCEL files" />
+                              <MenuItem mnemonicParsing="false" onAction="#openDirChl" text="Mở thư mục chứa các file CHL" />
                               <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Đóng" />
                         </items>
                       </Menu>
@@ -67,7 +67,7 @@
             <HBox layoutX="10.0" layoutY="35.0" spacing="20.0">
                <children>
                   <TextField fx:id="linkCvsDir" editable="false" HBox.hgrow="SOMETIMES" />
-                  <Button fx:id="setSaveCsvFileDirBtn" mnemonicParsing="false" onAction="#setSaveCsvFileDir" style="-fx-background-radius: 8;" text="Chọn thư mục lưu file" textFill="#0463e8">
+                  <Button fx:id="setSaveCsvFileDirBtn" mnemonicParsing="false" onAction="#setSaveChlFileDir" style="-fx-background-radius: 8;" text="Chọn thư mục lưu file" textFill="#0463e8">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -82,7 +82,7 @@
    <center>
       <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="listCsvFileTitle" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8BC34A; -fx-background-radius: 5 5 0 0;" text="Danh sách file đã chuyển sang EXCEL.csv" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+            <Label fx:id="listCsvFileTitle" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8BC34A; -fx-background-radius: 5 5 0 0;" text="Danh sách file đã chuyển sang CHL.sysc2" textAlignment="CENTER" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="System Bold Italic" size="12.0" />
                </font>
@@ -113,7 +113,7 @@
                         </DropShadow>
                      </effect>
                   </Button>
-                  <Button fx:id="openDirCsvBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="75.0" mnemonicParsing="false" onAction="#openDirCsv" prefWidth="168.0" style="-fx-background-radius: 20;" text="Mở thư mục chứa các file EXCEL" textAlignment="CENTER" textFill="#0463e8" wrapText="true">
+                  <Button fx:id="openDirCsvBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="75.0" mnemonicParsing="false" onAction="#openDirChl" prefWidth="168.0" style="-fx-background-radius: 20;" text="Mở thư mục chứa các file CHL" textAlignment="CENTER" textFill="#0463e8" wrapText="true">
                      <font>
                         <Font name="Tahoma Bold" size="12.9" />
                      </font>
@@ -145,7 +145,7 @@
                               <Font name="System Italic" size="12.0" />
                            </font>
                         </Label>
-                        <Button fx:id="copyLinkBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#copyLinkCsvDir" prefWidth="72.0" style="-fx-background-radius: 12;" text="Copy link thư mục" textAlignment="CENTER" textFill="#4b4d03" wrapText="true">
+                        <Button fx:id="copyLinkBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#copyLinkChlDir" prefWidth="72.0" style="-fx-background-radius: 12;" text="Copy link thư mục" textAlignment="CENTER" textFill="#4b4d03" wrapText="true">
                            <font>
                               <Font name="System Italic" size="12.0" />
                            </font></Button>

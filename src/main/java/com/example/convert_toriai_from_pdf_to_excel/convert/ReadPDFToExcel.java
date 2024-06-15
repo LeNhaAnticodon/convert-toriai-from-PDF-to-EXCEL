@@ -14,6 +14,7 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeoutException;
 
 public class ReadPDFToExcel {
 
@@ -32,6 +33,7 @@ public class ReadPDFToExcel {
 
     private static String xlsxExcelPath = "";
     private static String csvExcelDirPath = "";
+    private static String chlDirPath = "";
     private static int rowToriAiNum;
 
     private static String kouSyu;
@@ -39,11 +41,13 @@ public class ReadPDFToExcel {
     private static String kouSyuName;
     public static String fileName;
 
-    public static void convertPDFToExcel(String filePDFPath, String fileCSVDirPath, ObservableList<CsvFile> csvFileNames) throws FileNotFoundException {
+    public static void convertPDFToExcel(String filePDFPath, String fileChlDirPath, ObservableList<CsvFile> csvFileNames) throws FileNotFoundException, TimeoutException {
         csvFileNames.clear();
 
         pdfPath = filePDFPath;
-        csvExcelDirPath = fileCSVDirPath;
+//        csvExcelDirPath = fileCSVDirPath;
+
+        chlDirPath = fileChlDirPath;
 
         String[] kakuKouSyu = getFullToriaiText();
         getHeaderData(kakuKouSyu[0]);
@@ -84,7 +88,8 @@ public class ReadPDFToExcel {
 
             if (kaKouPairs != null) {
 //                writeDataToExcel(kaKouPairs, i - 1, csvFileNames);
-                writeDataToCSV(kaKouPairs, i - 1, csvFileNames);
+//                writeDataToCSV(kaKouPairs, i - 1, csvFileNames);
+                writeDataToChl(kaKouPairs, i - 1, csvFileNames);
             }
         }
 
@@ -172,7 +177,7 @@ public class ReadPDFToExcel {
         }
     }
 
-    private static Map<Map<StringBuilder, Integer>, Map<StringBuilder, Integer>> getToriaiData(String[] kakuKakou) {
+    private static Map<Map<StringBuilder, Integer>, Map<StringBuilder, Integer>> getToriaiData(String[] kakuKakou) throws TimeoutException {
         rowToriAiNum = 0;
 
         Map<Map<StringBuilder, Integer>, Map<StringBuilder, Integer>> kaKouPairs = new LinkedHashMap<>();
@@ -233,7 +238,7 @@ public class ReadPDFToExcel {
         if (rowToriAiNum > 99) {
             rowToriAiNum = 99;
             System.out.println("vượt quá 99 hàng");
-            return null;
+            throw new TimeoutException();
         }
 
         System.out.println(rowToriAiNum);
@@ -525,11 +530,188 @@ public class ReadPDFToExcel {
 
     }
 
+    private static void writeDataToChl(Map<Map<StringBuilder, Integer>, Map<StringBuilder, Integer>> kaKouPairs, int timePlus, ObservableList<CsvFile> csvFileNames) throws FileNotFoundException, TimeoutException {
+
+        // Ghi thời gian hiện tại vào dòng đầu tiên
+        Date currentDate = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmm");
+//        // Tạo thêm fomat có thêm giây
+//        SimpleDateFormat sdfSecond = new SimpleDateFormat("yyMMddHHmmss");
+
+        // Tăng thời gian lên timePlus phút
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDate);
+        calendar.add(Calendar.MINUTE, timePlus);
+
+        // Lấy thời gian sau khi tăng
+        Date newDate = calendar.getTime();
+
+        String newTime = sdf.format(newDate);
+
+        // lấy tên file chl trong tiêu đề gắn thêm tên vật liệu + .sysc2
+        fileName = fileChlName + " " + kouSyu + ".sysc2";
+
+//        // tạo tên file có gắn thêm thời gian để không trùng với file trước đó
+//        String fileNameAndTime = linkarr[linkarr.length - 1].split("\\.")[0] + "(" + sdfSecond.format(currentDate) + ")--" + kouSyu + ".csv";
+
+        String chlPath = chlDirPath + "\\" + fileName;
+        System.out.println("dir path: " + csvExcelDirPath);
+        System.out.println("filename: " + fileName);
+
+        // thêm file vào list hiển thị
+        csvFileNames.add(new CsvFile(fileName, kouSyuName));
+
+        // Tạo đối tượng File đại diện cho file cần xóa
+        File file = new File(chlPath);
+
+        // Kiểm tra nếu file tồn tại và xóa nó
+        // vì nếu file đang được mở thì không thể ghi đè nhưng do file là readonly nên có thể xóa dù đang mở
+        // xóa xong file thì có thể ghi lại file mới mà không bị lỗi không thể ghi đè
+        if (file.exists()) {
+            if (file.delete()) {
+//                System.out.println("File đã được xóa thành công.");
+            } else {
+//                System.out.println("Xóa file thất bại.");
+            }
+        } else {
+//            System.out.println("File không tồn tại.");
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(chlPath, Charset.forName("MS932")))) {
+
+            writer.write(newTime + ",,,"); writer.newLine();
+
+
+            // Ghi size1, size2, size3, 1 vào dòng tiếp theo
+            writer.write(size1 + "," + size2 + "," + size3 + "," + "1"); writer.newLine();
+
+            // Ghi koSyuNumMark, 1, 99, 1 vào dòng tiếp theo, rowToriAiNum sẽ được sử dụng sau khi ước tính ghi đến hàng 102
+            writer.write(koSyuNumMark + "," + "1" + "," + "99" + "," + "1"); writer.newLine();
+
+            List<String[]> toriaiDatas = new LinkedList<>();
+
+            int rowIndex = 3;
+
+            // Ghi dữ liệu từ KA_KOU_PAIRS vào các ô
+            // kaKouPairs là map chứa key cũng là map chỉ có 1 cặp có key là chiều dài bozai, value là số lượng bozai
+            // còn value của kaKouPairs cũng là map chứa các cặp key là chiều dài sản phẩm, value là số lượng sản phẩm
+            for (Map.Entry<Map<StringBuilder, Integer>, Map<StringBuilder, Integer>> entry : kaKouPairs.entrySet()) {
+                if (rowIndex >= 102) break;
+
+                Map<StringBuilder, Integer> kouZaiChouPairs = entry.getKey();
+                Map<StringBuilder, Integer> meiSyouPairs = entry.getValue();
+
+                // chiều dài bozai
+                String keyTemp = "";
+                // số lượng bozai
+                int valueTemp = 0;
+
+                // Ghi dữ liệu bozai từ mapkey vào ô C4 kouZaiChouPairs
+                for (Map.Entry<StringBuilder, Integer> kouZaiEntry : kouZaiChouPairs.entrySet()) {
+                    keyTemp = String.valueOf(kouZaiEntry.getKey());
+                    valueTemp = kouZaiEntry.getValue();
+                }
+
+                // Ghi dữ liệu từ mapvalue vào ô A4, B4 và các hàng tiếp theo
+                for (int i = 0; i < valueTemp; i++) {
+                    int j = 0; // đếm số hàng đã ghi
+                    // lặp qua map sản phẩm, tính chiều dài map bằng j
+                    for (Map.Entry<StringBuilder, Integer> meiSyouEntry : meiSyouPairs.entrySet()) {
+                        if (rowIndex >= 102) break;
+
+                        String[] line = new String[3];
+                        rowIndex++;
+                        line[0] = String.valueOf(meiSyouEntry.getKey());
+                        line[1] = meiSyouEntry.getValue().toString();
+                        // ghi vào phần tử thứ 3 của mảng giá trị rỗng để tránh giá trị null
+                        line[2] = "";
+
+                        toriaiDatas.add(line);
+                        j++;
+                    }
+                    // ghi vào cột 3 ([2]) chiều dài bozai khi ghi xong 1 lượt sản phẩm + số lượng
+                    // tính vị trí của nó bằng cách lấy size của list kaKouPairs - chiều dài map sản phẩm
+                    toriaiDatas.get(toriaiDatas.size() - j)[2] = keyTemp;
+                }
+            }
+
+/*
+            // nếu không có hàng sản phẩm nào thì sẽ chưa tạo hàng 4, 5, 6, 7, 8 và rowIndex vẫn là 3
+            // cần tạo thêm 4 hàng này để ghi các thông tin kouJiMe, kyakuSakiMei, shortNouKi, kirirosu, fileName bên dưới
+            // không cần tạo nữa vì ghi file sysc2 sẽ ghi xuống cuối
+            for (int i = 0; i < 5; i++) {
+                if (rowIndex <= i + 3) {
+                    toriaiDatas.add(new String[4]);
+                }
+            }
+*/
+
+/*
+            // Ghi kouJiMe, kyakuSakiMei, shortNouKi, kirirosu, fileName + " " + kouSyu vào ô D4, D5, D6, D7
+            // không cần tạo nữa vì ghi file sysc2 sẽ ghi xuống cuối
+            toriaiDatas.get(0)[3] = kouJiMe;
+            toriaiDatas.get(1)[3] = kyakuSakiMei;
+            toriaiDatas.get(2)[3] = shortNouKi;
+            toriaiDatas.get(3)[3] = kirirosu;
+            toriaiDatas.get(4)[3] = fileChlName + " " + kouSyu;
+*/
+            // lặp qua list chứa các dòng toriaiDatas
+            for (String[] line : toriaiDatas) {
+                // mỗi dòng là 1 mảng nên lặp qua mảng ghi các phần tử vào dòng phân tách nhau bởi dấu (,)
+                for (String length : line) {
+                    writer.write(length + ",");
+                }
+                writer.newLine();
+            }
+
+            // ghi nốt các dòng còn lại không có sản phẩn ",,," để đủ 99 sản phẩm
+            for (int i = toriaiDatas.size(); i < 99; i++) {
+                writer.write(",,,"); writer.newLine();
+            }
+
+
+            // Ghi giá trị 0 vào dòng tiếp theo là dòng 103
+            writer.write("0,0,0,0");  writer.newLine();
+            // ghi 20 vaf kirirosu vào dòng tiếp
+            writer.write("20.0," + kirirosu + ",,");  writer.newLine();
+            // ghi các tên và ngày vào dòng tiếp
+            writer.write(kouJiMe + "," +  kyakuSakiMei + "," +  shortNouKi + ",");  writer.newLine();
+            // dòng tiếp theo là ghi 備考１、備考２ theo định dạng 備考１,備考２,, nhưng không có nên không cần chỉ ghi (,,,)
+            writer.write(",,,");  writer.newLine();
+            // ghi dấu hiệu nhận biết kết thúc
+            writer.write("END,,,");  writer.newLine();
+
+
+        } catch (IOException e) {
+            if (e instanceof FileNotFoundException) {
+                System.out.println("File đang được mở bởi người dùng khác");
+                throw new TimeoutException();
+            }
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+/*        // Đặt quyền chỉ đọc cho file
+        File readOnly = new File(chlPath);
+        if (readOnly.exists()) {
+            boolean result = readOnly.setReadOnly();
+            if (result) {
+//                System.out.println("File is set to read-only.");
+            } else {
+//                System.out.println("Failed to set file to read-only.");
+            }
+        } else {
+//            System.out.println("File does not exist.");
+        }*/
+
+    }
+
     private static String extractValue(String text, String startDelimiter, String endDelimiter) {
         int startIndex = text.indexOf(startDelimiter) + startDelimiter.length();
         int endIndex = text.indexOf(endDelimiter, startIndex);
         return text.substring(startIndex, endIndex).trim();
     }
+
 
     private static int convertStringToIntAndMul(String textNum, int multiplier) {
         Double num = null;
