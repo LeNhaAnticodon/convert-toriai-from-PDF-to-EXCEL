@@ -103,7 +103,7 @@ public class ConVertPdfToExcelCHLController implements Initializable {
     private static final String CONFIRM_PDF_FILE_LINK_CONTENT = "Hãy chọn file PDF để tiếp tục!";
 
     private static final String CONFIRM_CHL_FILE_DIR_TITLE = "Xác nhận thư mục chứa các file CHL";
-    private static final String CONFIRM_CHL_FILE_DIR_HEADER = "Địa chỉ thư mục chứa các file Excel chưa được xác nhận";
+    private static final String CONFIRM_CHL_FILE_DIR_HEADER = "Địa chỉ thư mục chứa các file CHL chưa được xác nhận";
     private static final String CONFIRM_CHL_FILE_DIR_CONTENT = "Hãy chọn thư mục chứa để tiếp tục!";
 
     private static final String CONFIRM_CONVERT_COMPLETE_TITLE = "Thông tin hoạt động chuyển file";
