@@ -530,7 +530,7 @@ public class ReadPDFToExcel {
 
     }
 
-    private static void writeDataToChl(Map<Map<StringBuilder, Integer>, Map<StringBuilder, Integer>> kaKouPairs, int timePlus, ObservableList<CsvFile> csvFileNames) throws FileNotFoundException, TimeoutException {
+    private static void writeDataToChl(Map<Map<StringBuilder, Integer>, Map<StringBuilder, Integer>> kaKouPairs, int timePlus, ObservableList<CsvFile> csvFileNames) throws FileNotFoundException {
 
         // Ghi thời gian hiện tại vào dòng đầu tiên
         Date currentDate = new Date();
@@ -685,13 +685,13 @@ public class ReadPDFToExcel {
         } catch (IOException e) {
             if (e instanceof FileNotFoundException) {
                 System.out.println("File đang được mở bởi người dùng khác");
-                throw new TimeoutException();
+                throw new FileNotFoundException();
             }
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
 
-/*        // Đặt quyền chỉ đọc cho file
+        // Đặt quyền chỉ đọc cho file
         File readOnly = new File(chlPath);
         if (readOnly.exists()) {
             boolean result = readOnly.setReadOnly();
@@ -702,7 +702,7 @@ public class ReadPDFToExcel {
             }
         } else {
 //            System.out.println("File does not exist.");
-        }*/
+        }
 
     }
 

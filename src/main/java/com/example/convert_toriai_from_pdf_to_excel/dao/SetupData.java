@@ -102,8 +102,8 @@ public class SetupData {
         languageMap.put("作成されているCHLファイルの名前: (\"\") は開いている別の CHL ファイルと同じ名前なので、上書きできません。", "Name_of_the_CHL");
         languageMap.put("続行するには、この開いている CHL ファイルを閉じてください。", "Please_close_the_open_CHL_file_to_continue");
 
-        languageMap.put("続行するには、この開いている CHL ファイルを閉じてください。", "Please_close_the_open_CHL_file_to_continue");
-        languageMap.put("続行するには、この開いている CHL ファイルを閉じてください。", "Please_close_the_open_CHL_file_to_continue");
+        languageMap.put("CHL ファイルを作成中: (\"\") の製品ライン番号が 99 より大きいため、記録できません。", "CHL_file_being_created");
+        languageMap.put("続行するには、転送中の鋼種データを編集してください。", "Please_edit_the_transferring_material_data_to_continue");
 
 
 
@@ -144,8 +144,8 @@ public class SetupData {
         languageMap.put("Name of the CHL file being created: (\"\") has the same name as another CHL file that is currently open, so it cannot be overwritten", "Name_of_the_CHL");
         languageMap.put("Please close the open CHL file to continue!", "Please_close_the_open_CHL_file_to_continue");
 
-        languageMap.put("Please close the open CHL file to continue!", "Please_close_the_open_CHL_file_to_continue");
-        languageMap.put("Please close the open CHL file to continue!", "Please_close_the_open_CHL_file_to_continue");
+        languageMap.put("CHL file being created: (\"\") has a product line number greater than 99, so it cannot be recorded", "CHL_file_being_created");
+        languageMap.put("Please edit the transferring material data to continue!", "Please_edit_the_transferring_material_data_to_continue");
     }
 
     public static SetupData getInstance() {

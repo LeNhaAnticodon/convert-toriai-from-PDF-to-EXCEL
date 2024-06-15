@@ -386,6 +386,7 @@ public class ConVertPdfToExcelCHLController implements Initializable {
                 confirmAlert.setTitle(CONFIRM_CONVERT_COMPLETE_TITLE);
                 confirmAlert.setHeaderText(CONFIRM_CONVERT_COMPLETE_HEADER);
                 confirmAlert.setContentText(CONFIRM_CONVERT_COMPLETE_CONTENT);
+
                 updateLangAlert(confirmAlert);
 
                 Optional<ButtonType> result = confirmAlert.showAndWait();
@@ -420,6 +421,7 @@ public class ConVertPdfToExcelCHLController implements Initializable {
                     confirmAlert.showAndWait();
 
                     confirmAlert.setAlertType(Alert.AlertType.CONFIRMATION);
+                    confirmAlert.getButtonTypes().add(ButtonType.CANCEL);
 
                     return;
                 }
@@ -433,6 +435,7 @@ public class ConVertPdfToExcelCHLController implements Initializable {
                     confirmAlert.showAndWait();
 
                     confirmAlert.setAlertType(Alert.AlertType.CONFIRMATION);
+                    confirmAlert.getButtonTypes().add(ButtonType.CANCEL);
 
                     return;
                 }
