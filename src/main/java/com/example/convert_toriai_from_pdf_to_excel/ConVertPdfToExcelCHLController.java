@@ -39,6 +39,7 @@ import javafx.scene.image.ImageView;
 
 import java.awt.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -406,6 +407,25 @@ public class ConVertPdfToExcelCHLController implements Initializable {
                 confirmAlert.setHeaderText(ERROR_CONVERT_HEADER);
                 confirmAlert.setContentText(ERROR_CONVERT_CONTENT);
                 updateLangAlert(confirmAlert);
+
+                // nếu là sự kiện không ghi được file csv do file trùng tên với file sắp tạo đang được mở
+                // th in ra cảnh báo
+                if (e instanceof FileNotFoundException) {
+                    confirmAlert.getButtonTypes().clear();
+                    confirmAlert.getButtonTypes().add(ButtonType.OK);
+                    confirmAlert.setHeaderText("Tên file EXCEL đang tạo: (\"" + ReadPDFToExcel.fileName +  "\") trùng tên với 1 file EXCEL khác đang được mở nên không thể ghi đè");
+                    confirmAlert.setContentText("Hãy đóng file EXCEL đang mở để tiếp tục!");
+                    System.out.println("File đang được mở bởi người dùng khác");
+                    updateLangAlert(confirmAlert);
+                    confirmAlert.showAndWait();
+
+                    confirmAlert.setAlertType(Alert.AlertType.CONFIRMATION);
+
+                    return;
+                }
+
+
+
                 Optional<ButtonType> result = confirmAlert.showAndWait();
 
                 confirmAlert.setAlertType(Alert.AlertType.CONFIRMATION);
@@ -492,8 +512,8 @@ public class ConVertPdfToExcelCHLController implements Initializable {
                     String newText = bundle.getString(key + "." + lang);
                     labeledControl.setText(newText);
                 }
-            } else if (control instanceof MenuBar menuBar) {
-                for (Menu menu : menuBar.getMenus()) {
+            } else if (control instanceof MenuBar menuBar1) {
+                for (Menu menu : menuBar1.getMenus()) {
                     String currentText = menu.getText();
                     String key = languageMap.get(currentText);
                     if (key != null) {
@@ -514,16 +534,37 @@ public class ConVertPdfToExcelCHLController implements Initializable {
                 String header = alert.getHeaderText();
                 String content = alert.getContentText();
 
+                String fileName = "";
+                // nếu header có .csv tức là trong tên có tên file đang tạo bị lỗi
+                // ở sự kiện tên file sắp tạo trùng tên với file đang mở
+                // tách tên file ra ghi vào fileName
+                // chỉ lấy phần cố định thêm "" vào giữa gán cho header
+                // phần cố định sẽ có trong map languageMap và lấy được keyHeader trong languageMap
+                // từ keyHeader lấy được ngôn ngữ đang dùng trong bundle
+                // phần tách tiếp ngôn ngữ chia 2 nửa tại điểm " rồi thêm " + fileName + " vào giữa để hiển thị hoàn chỉnh theo ngôn ngữ này
+                if (header.contains(".csv")) {
+                    String[] headerarr = header.split("\"");
+                    fileName = headerarr[1];
+                    header = headerarr[0] + "\"\"" + headerarr[2];
+                }
+
                 String keyTitle = languageMap.get(title);
                 String keyHeader = languageMap.get(header);
                 String keyContent = languageMap.get(content);
+
 
                 if (keyTitle != null) {
                     alert.setTitle(bundle.getString(keyTitle + "." + lang));
                 }
 
                 if (keyHeader != null) {
-                    alert.setHeaderText(bundle.getString(keyHeader + "." + lang));
+                    if (fileName.isBlank()) {
+                        alert.setHeaderText(bundle.getString(keyHeader + "." + lang));
+                    } else {
+                        String[] headerArr = bundle.getString(keyHeader + "." + lang).split("\"");
+                        alert.setHeaderText(headerArr[0] + "\"" + fileName + "\"" + headerArr[2]);
+
+                    }
                 }
 
                 if (keyContent != null) {

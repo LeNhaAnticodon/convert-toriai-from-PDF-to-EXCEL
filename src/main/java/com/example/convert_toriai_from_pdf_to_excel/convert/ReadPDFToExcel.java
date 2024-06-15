@@ -26,7 +26,7 @@ public class ReadPDFToExcel {
     private static String koSyuNumMark = "3";
     private static String kirirosu = "";
 
-    private static String fileName = "";
+    private static String fileChlName = "";
 
     private static String pdfPath = "";
 
@@ -37,8 +37,9 @@ public class ReadPDFToExcel {
     private static String kouSyu;
 
     private static String kouSyuName;
+    public static String fileName;
 
-    public static void convertPDFToExcel(String filePDFPath, String fileCSVDirPath, ObservableList<CsvFile> csvFileNames) {
+    public static void convertPDFToExcel(String filePDFPath, String fileCSVDirPath, ObservableList<CsvFile> csvFileNames) throws FileNotFoundException {
         csvFileNames.clear();
 
         pdfPath = filePDFPath;
@@ -116,7 +117,7 @@ public class ReadPDFToExcel {
 
         kouJiMe = extractValue(header, "考[", "]");
         kyakuSakiMei = extractValue(header, "客先名[", "]");
-        fileName = extractValue(header, "工事名[", "]");
+        fileChlName = extractValue(header, "工事名[", "]");
 
         System.out.println(shortNouKi + " : " + kouJiMe + " : " + kyakuSakiMei);
     }
@@ -241,7 +242,7 @@ public class ReadPDFToExcel {
         return kaKouPairs;
     }
 
-    private static void writeDataToExcel(Map<Map<StringBuilder, Integer>, Map<StringBuilder, Integer>> kaKouPairs, int timePlus, ObservableList<CsvFile> csvFileNames) {
+    private static void writeDataToExcel(Map<Map<StringBuilder, Integer>, Map<StringBuilder, Integer>> kaKouPairs, int timePlus, ObservableList<CsvFile> csvFileNames) throws FileNotFoundException {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Sheet1");
 
@@ -252,6 +253,7 @@ public class ReadPDFToExcel {
         // Ghi thời gian hiện tại vào dòng đầu tiên
         Date currentDate = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmm");
+//        SimpleDateFormat sdfSecond = new SimpleDateFormat("yyMMddHHmmss");
 
         // Tăng thời gian lên timePlus phút
         Calendar calendar = Calendar.getInstance();
@@ -326,7 +328,7 @@ public class ReadPDFToExcel {
         sheet.getRow(4).createCell(3).setCellValue(kyakuSakiMei);
         sheet.getRow(5).createCell(3).setCellValue(shortNouKi);
         sheet.getRow(6).createCell(3).setCellValue(kirirosu);
-        sheet.getRow(7).createCell(3).setCellValue(fileName + " " + kouSyu);
+        sheet.getRow(7).createCell(3).setCellValue(fileChlName + " " + kouSyu);
 
         // Ghi giá trị 0 vào các ô A99, B99, C99, D99
         Row lastRow = sheet.createRow(rowIndex);
@@ -336,7 +338,8 @@ public class ReadPDFToExcel {
         lastRow.createCell(3).setCellValue(0);
 
         String[] linkarr = pdfPath.split("\\\\");
-        String fileName = linkarr[linkarr.length - 1].split("\\.")[0] + " " + kouSyu + ".csv";
+        fileName = linkarr[linkarr.length - 1].split("\\.")[0] + " " + kouSyu + ".csv";
+//        String fileNameAndTime = linkarr[linkarr.length - 1].split("\\.")[0] + "(" + sdfSecond.format(currentDate) + ")--" + kouSyu + ".csv";
         String excelPath = csvExcelDirPath + "\\" + fileName;
 
         csvFileNames.add(new CsvFile(fileName, kouSyuName));
@@ -345,33 +348,89 @@ public class ReadPDFToExcel {
             workbook.write(fileOut);
             workbook.close();
         } catch (IOException e) {
-            System.out.println(e.getMessage());;
+            if (e instanceof FileNotFoundException) {
+                System.out.println("File đang được mở bởi người dùng khác");
+                throw new FileNotFoundException();
+            }
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        // Tạo đối tượng File đại diện cho file cần xóa
+        File file = new File(excelPath);
+
+        // Kiểm tra nếu file tồn tại và xóa nó
+        // vì nếu file đang được mở thì không thể ghi đè nhưng do file là readonly nên có thể xóa dù đang mở
+        // xóa xong file thì có thể ghi lại file mới mà không bị lỗi không thể ghi đè
+        if (file.exists()) {
+            if (file.delete()) {
+//                System.out.println("File đã được xóa thành công.");
+            } else {
+//                System.out.println("Xóa file thất bại.");
+            }
+        }
+
+        // Đặt quyền chỉ đọc cho file
+        File readOnly = new File(excelPath);
+        if (readOnly.exists()) {
+            boolean result = readOnly.setReadOnly();
+            if (result) {
+                System.out.println("File is set to read-only.");
+            } else {
+                System.out.println("Failed to set file to read-only.");
+            }
+        } else {
+            System.out.println("File does not exist.");
         }
     }
 
-    private static void writeDataToCSV(Map<Map<StringBuilder, Integer>, Map<StringBuilder, Integer>> kaKouPairs, int timePlus, ObservableList<CsvFile> csvFileNames) {
+    private static void writeDataToCSV(Map<Map<StringBuilder, Integer>, Map<StringBuilder, Integer>> kaKouPairs, int timePlus, ObservableList<CsvFile> csvFileNames) throws FileNotFoundException {
+
+        // Ghi thời gian hiện tại vào dòng đầu tiên
+        Date currentDate = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmm");
+//        // Tạo thêm fomat có thêm giây
+//        SimpleDateFormat sdfSecond = new SimpleDateFormat("yyMMddHHmmss");
+
+        // Tăng thời gian lên timePlus phút
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDate);
+        calendar.add(Calendar.MINUTE, timePlus);
+
+        // Lấy thời gian sau khi tăng
+        Date newDate = calendar.getTime();
+
+        String newTime = sdf.format(newDate);
 
         String[] linkarr = pdfPath.split("\\\\");
-        String fileName = linkarr[linkarr.length - 1].split("\\.")[0] + " " + kouSyu + ".csv";
+        fileName = linkarr[linkarr.length - 1].split("\\.")[0] + " " + kouSyu + ".csv";
+//        // tạo tên file có gắn thêm thời gian để không trùng với file trước đó
+//        String fileNameAndTime = linkarr[linkarr.length - 1].split("\\.")[0] + "(" + sdfSecond.format(currentDate) + ")--" + kouSyu + ".csv";
         String csvPath = csvExcelDirPath + "\\" + fileName;
+        System.out.println("dir path: " + csvExcelDirPath);
+        System.out.println("filename: " + fileName);
 
         csvFileNames.add(new CsvFile(fileName, kouSyuName));
 
+        // Tạo đối tượng File đại diện cho file cần xóa
+        File file = new File(csvPath);
+
+        // Kiểm tra nếu file tồn tại và xóa nó
+        // vì nếu file đang được mở thì không thể ghi đè nhưng do file là readonly nên có thể xóa dù đang mở
+        // xóa xong file thì có thể ghi lại file mới mà không bị lỗi không thể ghi đè
+        if (file.exists()) {
+            if (file.delete()) {
+//                System.out.println("File đã được xóa thành công.");
+            } else {
+//                System.out.println("Xóa file thất bại.");
+            }
+        } else {
+//            System.out.println("File không tồn tại.");
+        }
+
         try (CSVWriter writer = new CSVWriter(new OutputStreamWriter(new FileOutputStream(csvPath), Charset.forName("MS932")))) {
 
-            // Ghi thời gian hiện tại vào dòng đầu tiên
-            Date currentDate = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmm");
 
-            // Tăng thời gian lên timePlus phút
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(currentDate);
-            calendar.add(Calendar.MINUTE, timePlus);
-
-            // Lấy thời gian sau khi tăng
-            Date newDate = calendar.getTime();
-
-            String newTime = sdf.format(newDate);
 
             writer.writeNext(new String[]{newTime});
 
@@ -433,20 +492,37 @@ public class ReadPDFToExcel {
             toriaiDatas.get(1)[3] = kyakuSakiMei;
             toriaiDatas.get(2)[3] = shortNouKi;
             toriaiDatas.get(3)[3] = kirirosu;
-            toriaiDatas.get(4)[3] = fileName + " " + kouSyu;
+            toriaiDatas.get(4)[3] = fileChlName + " " + kouSyu;
 
             writer.writeAll(toriaiDatas);
 
             // Ghi giá trị 0 vào các ô A99, B99, C99, D99
             writer.writeNext(new String[]{"0", "0", "0", "0"});
 
+
+
         } catch (IOException e) {
             if (e instanceof FileNotFoundException) {
                 System.out.println("File đang được mở bởi người dùng khác");
+                throw new FileNotFoundException();
             }
-            e.printStackTrace();
             System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
+
+        // Đặt quyền chỉ đọc cho file
+        File readOnly = new File(csvPath);
+        if (readOnly.exists()) {
+            boolean result = readOnly.setReadOnly();
+            if (result) {
+                System.out.println("File is set to read-only.");
+            } else {
+                System.out.println("Failed to set file to read-only.");
+            }
+        } else {
+            System.out.println("File does not exist.");
+        }
+
     }
 
     private static String extractValue(String text, String startDelimiter, String endDelimiter) {

@@ -61,6 +61,9 @@ public class SetupData {
         languageMap.put("chọn địa chỉ file PDF có nội dung tính vật liệu trên máy và chọn địa chỉ thư mục sẽ chứa các file EXCEL khi chuyển xong. Các link này sau khi được chọn sẽ hiển thị ở các ô bên trái. Sau đó ấn vào nút chuyển để thực hiện. Các file EXCEL tạo ra sẽ hiển thị trong danh sách bên trái. Có thể nhấn nút Copy link thư mục sẽ chứa các file EXCEL hoặc ấn nút mở thư mục chứa các file EXCEL để mở cửa sổ thư mục này.", "Select_the_PDF");
         languageMap.put("Thực hiện: Lê Nhã", "copyright");
 
+        languageMap.put("Tên file EXCEL đang tạo: (\"\") trùng tên với 1 file EXCEL khác đang được mở nên không thể ghi đè", "Name_of_the_EXCEL");
+        languageMap.put("Hãy đóng file EXCEL đang mở để tiếp tục!", "Please_close_the_open_EXCEL_file_to_continue");
+
 
 
         languageMap.put("転送するファイルを選択します", "Select_the_file_to_transfer");
@@ -98,6 +101,9 @@ public class SetupData {
         languageMap.put("パソコン上の材料計算コンテンツが含まれる PDF ファイルのアドレスを選択し、転送が完了したときに EXCEL ファイルが含まれるフォルダーのアドレスを選択します。これらのリンクを選択すると、左側のボックスに表示されます。その後、スイッチボタンを押して実行します。作成したEXCELファイルが左側のリストに表示されます。 EXCEL ファイルを含むフォルダーへのリンクのコピー ボタンを押すか、EXCEL ファイルを含むフォルダーを開くボタンを押して、このフォルダー ウィンドウを開くことができます。", "Select_the_PDF");
         languageMap.put("作者: ル・ニャ", "copyright");
 
+        languageMap.put("作成されているEXCELファイルの名前: (\"\") は開いている別の EXCEL ファイルと同じ名前なので、上書きできません。", "Name_of_the_EXCEL");
+        languageMap.put("続行するには、この開いている EXCEL ファイルを閉じてください。", "Please_close_the_open_EXCEL_file_to_continue");
+
 
 
         languageMap.put("Select the file to transfer", "Select_the_file_to_transfer");
@@ -134,6 +140,9 @@ public class SetupData {
         languageMap.put("Using:", "Using");
         languageMap.put("Select the PDF file address containing the material calculation content on your computer and select the folder address that will contain the EXCEL files when the transfer is complete. These links, once selected, will be displayed in the boxes on the left. Then press the switch button to execute. The created EXCEL files will display in the list on the left. You can press the Copy link button to the folder that will contain EXCEL files or press the button to open the folder containing EXCEL files to open this folder window.", "Select_the_PDF");
         languageMap.put("copyright ©: Le Nha", "copyright");
+
+        languageMap.put("Name of the EXCEL file being created: (\"\") has the same name as another EXCEL file that is currently open, so it cannot be overwritten", "Name_of_the_EXCEL");
+        languageMap.put("Please close the open EXCEL file to continue!", "Please_close_the_open_EXCEL_file_to_continue");
     }
 
     public static SetupData getInstance() {

@@ -24,8 +24,6 @@ public class AboutController {
     @FXML
     public Label creator;
 
-    private ConVertPdfToExcelCHLController conVertPdfToExcelCHLController;
-
     private Dialog<Object> dialog;
 
     public void okAbout(ActionEvent actionEvent) {
