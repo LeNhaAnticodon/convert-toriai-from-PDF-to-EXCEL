@@ -41,7 +41,7 @@ public class ReadPDFToExcel {
     private static String kouSyuName;
     public static String fileName;
 
-    public static void convertPDFToExcel(String filePDFPath, String fileChlDirPath, ObservableList<CsvFile> csvFileNames) throws FileNotFoundException, TimeoutException {
+    public static void convertPDFToExcel(String filePDFPath, String fileChlDirPath, ObservableList<CsvFile> csvFileNames) throws FileNotFoundException, TimeoutException, IOException {
         csvFileNames.clear();
 
         pdfPath = filePDFPath;
@@ -95,7 +95,7 @@ public class ReadPDFToExcel {
 
     }
 
-    private static String[] getFullToriaiText() {
+    private static String[] getFullToriaiText() throws IOException {
         String[] kakuKouSyu = new String[0];
         try(PDDocument document = PDDocument.load(new File(pdfPath))) {
             if (!document.isEncrypted()) {
@@ -107,8 +107,6 @@ public class ReadPDFToExcel {
 //                System.out.println(toriaiText);
 
             }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
         }
 
         return kakuKouSyu;
@@ -558,8 +556,7 @@ public class ReadPDFToExcel {
         System.out.println("dir path: " + csvExcelDirPath);
         System.out.println("filename: " + fileName);
 
-        // thêm file vào list hiển thị
-        csvFileNames.add(new CsvFile(fileName, kouSyuName));
+
 
         // Tạo đối tượng File đại diện cho file cần xóa
         File file = new File(chlPath);
@@ -703,6 +700,9 @@ public class ReadPDFToExcel {
         } else {
 //            System.out.println("File does not exist.");
         }
+
+        // thêm file vào list hiển thị
+        csvFileNames.add(new CsvFile(fileName, kouSyuName));
 
     }
 
