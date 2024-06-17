@@ -50,11 +50,14 @@ public class ReadPDFToExcel {
         chlDirPath = fileChlDirPath;
 
         String[] kakuKouSyu = getFullToriaiText();
+        // lấy trang đầu tiên và lấy các thông tin của đơn như tên khách hàng, ngày tháng
         getHeaderData(kakuKouSyu[0]);
 
+        // chuyển mảng các trang sang dạng list
         List<String> kakuKouSyuList = new LinkedList<>(Arrays.asList(kakuKouSyu));
         int kakuKouSyuListSize = kakuKouSyuList.size();
 
+        // lặp qua các trang gộp các trang cùng loại vật liệu làm 1 và xóa các trang đã được gộp vào trang khác đi
         for (int i = 1; i < kakuKouSyuListSize; i++) {
             String KouSyuName = extractValue(kakuKouSyuList.get(i), "法:", "梱包");
 
@@ -80,17 +83,23 @@ public class ReadPDFToExcel {
             }*/
         }
 
+        // lặp qua từng loại vật liệu và ghi chúng vào các file chl
         for (int i = 1; i < kakuKouSyuList.size(); i++) {
+            // tách các đoạn bozai thành mảng
             String[] kakuKakou = kakuKouSyuList.get(i).split("加工No:");
 
+            // tại đoạn đầu tiên sẽ không chứa bozai mà chứa tên vật liệu
+            // lấy ra thông số loại vật liệu và 3 size riêng lẻ của vật liệu
             getKouSyu(kakuKakou);
+            // tạo map kaKouPairs và nhập thông tin tính vật liệu vào
+            // kaKouPairs là map chứa key cũng là map chỉ có 1 cặp có key là chiều dài bozai, value là số lượng bozai
+            // còn value của kaKouPairs cũng là map chứa các cặp key là chiều dài sản phẩm, value là số lượng sản phẩm
             Map<Map<StringBuilder, Integer>, Map<StringBuilder, Integer>> kaKouPairs = getToriaiData(kakuKakou);
 
-            if (kaKouPairs != null) {
-//                writeDataToExcel(kaKouPairs, i - 1, csvFileNames);
+            //                writeDataToExcel(kaKouPairs, i - 1, csvFileNames);
 //                writeDataToCSV(kaKouPairs, i - 1, csvFileNames);
-                writeDataToChl(kaKouPairs, i, csvFileNames);
-            }
+            // ghi thông tin vào file định dạng sysc2 là file của chl
+            writeDataToChl(kaKouPairs, i, csvFileNames);
         }
 
     }
@@ -102,6 +111,7 @@ public class ReadPDFToExcel {
                 PDFTextStripper pdfStripper = new PDFTextStripper();
                 String toriaiText = pdfStripper.getText(document);
 
+                // chia thành các trang thông qua đoạn 材寸, mỗi trang sẽ chứa loại vật liệu ở đầu trang
                 kakuKouSyu = toriaiText.split("材寸");
 
 //                System.out.println(toriaiText);
