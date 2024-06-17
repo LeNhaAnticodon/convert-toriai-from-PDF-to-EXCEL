@@ -89,7 +89,7 @@ public class ReadPDFToExcel {
             if (kaKouPairs != null) {
 //                writeDataToExcel(kaKouPairs, i - 1, csvFileNames);
 //                writeDataToCSV(kaKouPairs, i - 1, csvFileNames);
-                writeDataToChl(kaKouPairs, i - 1, csvFileNames);
+                writeDataToChl(kaKouPairs, i, csvFileNames);
             }
         }
 
@@ -546,7 +546,7 @@ public class ReadPDFToExcel {
         // Lấy thời gian sau khi tăng
         Date newDate = calendar.getTime();
 
-        String newTime = sdf.format(newDate);
+        String newTime = sdf.format(currentDate);
 
         // lấy tên file chl trong tiêu đề gắn thêm tên vật liệu + .sysc2
         fileName = fileChlName + " " + kouSyu + ".sysc2";
@@ -579,7 +579,7 @@ public class ReadPDFToExcel {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(chlPath, Charset.forName("MS932")))) {
 
-            writer.write(newTime + ",,,"); writer.newLine();
+            writer.write(newTime + "+" + timePlus + ",,,"); writer.newLine();
 
 
             // Ghi size1, size2, size3, 1 vào dòng tiếp theo

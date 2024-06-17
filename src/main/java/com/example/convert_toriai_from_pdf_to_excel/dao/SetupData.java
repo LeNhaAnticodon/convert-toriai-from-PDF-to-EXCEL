@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class SetupData {
     private static SetupData instance;
-    private static final String FILE_SETUP_NAME = "setup_data.dat";
+    private static final String FILE_SETUP_NAME = "setup_data.set";
     private final ObservableList<CsvFile> csvFiles = FXCollections.observableArrayList();
     private final Map<String, String> languageMap = new HashMap<>();
     private final Setup setup = new Setup();
