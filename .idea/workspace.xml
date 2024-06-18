@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d1b1403b-b6e3-4111-8e2a-abaec6ff8cc2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup_data.set" beforeDir="false" afterPath="$PROJECT_DIR$/setup_data.set" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/convert_toriai_from_pdf_to_excel/MainApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +44,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
     &quot;last_directory_selection&quot;: &quot;C:/Users/HuanTech PC/IdeaProjects/convert toriai from PDF to EXCEL/src/main/java/com/example/convert_toriai_from_pdf_to_excel&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/HuanTech PC/IdeaProjects/convert toriai from PDF to EXCEL/ICON&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/HuanTech PC/IdeaProjects/convert toriai from PDF to EXCEL/src/main&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -55,6 +57,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\HuanTech PC\IdeaProjects\convert toriai from PDF to EXCEL\src\main" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="MainApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.convert_toriai_from_pdf_to_excel.MainApplication" />
@@ -115,6 +122,11 @@
       <workItem from="1718587932214" duration="65000" />
       <workItem from="1718609469394" duration="2505000" />
       <workItem from="1718613566082" duration="5154000" />
+      <workItem from="1718620516456" duration="752000" />
+      <workItem from="1718621281187" duration="10000" />
+      <workItem from="1718621419432" duration="21000" />
+      <workItem from="1718621442921" duration="256000" />
+      <workItem from="1718677865511" duration="447000" />
     </task>
     <servers />
   </component>

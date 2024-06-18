@@ -14,7 +14,7 @@ public class MainApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("convertPdfToExcelCHL.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("CHUYỂN ĐỔI FILE PDF TÍNH TOÁN VẬT LIỆU SANG EXCEL CHL");
+        stage.setTitle("CHUYỂN ĐỔI FILE PDF TÍNH TOÁN VẬT LIỆU SANG CHL");
         stage.setScene(scene);
         stage.show();
         ((ConVertPdfToExcelCHLController) fxmlLoader.getController()).getControls().add(stage);
